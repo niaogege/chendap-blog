@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[chendap's Blog]]></title>
+        <description><![CDATA[chendap's Blog]]></description>
+        <link>https://bythewayer.com/</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Fri, 14 Apr 2023 10:14:20 GMT</lastBuildDate>
+        <atom:link href="https://bythewayer.com/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[2022全年总结]]></title>
+            <link>/blog/2022remember</link>
+            <guid isPermaLink="true">/blog/2022remember</guid>
+            <category><![CDATA[2022]]></category>
+            <category><![CDATA[全年总结]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Wed, 28 Dec 2022 15:48:26 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[centos安装mysql@5.7.40]]></title>
+            <link>/blog/centos install mysql</link>
+            <guid isPermaLink="true">/blog/centos install mysql</guid>
+            <category><![CDATA[mysql]]></category>
+            <category><![CDATA[centos]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Thu, 29 Dec 2022 15:14:51 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Where is the personal value of front-end engineers(转载)]]></title>
+            <link>/blog/Where-is-the-personal-value-of-front-end-engineers-转载</link>
+            <guid isPermaLink="true">/blog/Where-is-the-personal-value-of-front-end-engineers-转载</guid>
+            <category><![CDATA[FE工程师价值]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Tue, 03 Jan 2023 11:02:56 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[tailwindcss介绍]]></title>
+            <link>/blog/tailwindcss介绍</link>
+            <guid isPermaLink="true">/blog/tailwindcss介绍</guid>
+            <category><![CDATA[css]]></category>
+            <category><![CDATA[tailwindcss]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Fri, 31 Mar 2023 22:24:54 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[picgo + custom Domain = my picture bed(搭建自己的图床)]]></title>
+            <link>/blog/picgo-custom-Domain-my-picture-bed</link>
+            <guid isPermaLink="true">/blog/picgo-custom-Domain-my-picture-bed</guid>
+            <category><![CDATA[图床]]></category>
+            <category><![CDATA[COS]]></category>
+            <category><![CDATA[CDN]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Wed, 04 Jan 2023 15:43:16 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[thinking: 前端已死?]]></title>
+            <link>/blog/thinking-前端已死</link>
+            <guid isPermaLink="true">/blog/thinking-前端已死</guid>
+            <category><![CDATA[Nextjs]]></category>
+            <category><![CDATA[SSR]]></category>
+            <category><![CDATA[SSG]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Wed, 05 Apr 2023 16:28:35 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[vitepress博客使用Algolia进行全局搜索]]></title>
+            <link>/blog/vitepress blog Algolia</link>
+            <guid isPermaLink="true">/blog/vitepress blog Algolia</guid>
+            <category><![CDATA[Algolia]]></category>
+            <category><![CDATA[search]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Mon, 13 Feb 2023 19:31:34 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[docker and FE]]></title>
+            <link>/blog/docker-and-FE</link>
+            <guid isPermaLink="true">/blog/docker-and-FE</guid>
+            <category><![CDATA[Docker]]></category>
+            <category><![CDATA[FE]]></category>
+            <dc:creator><![CDATA[chendap]]></dc:creator>
+            <pubDate>Wed, 28 Dec 2022 22:37:59 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

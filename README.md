@@ -1,38 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+待办计划
 
-## Getting Started
+## 功能介绍
 
-First, run the development server:
+- 完全自定义主题，页面静态化渲染，SSG
+- 如何利用 nodejs 把某一个目录下的文章转换成 Blog 目录下的页面？
+- 标签页和时间线以及关于自己页面
+- 评论功能，现在还不知道对接哪一个评论系统
+- 根据文档自动生成网站 tag
+- 文章页面，md 格式代码高亮
+- 国际化(中英文)
+- 黑白主题切换
+- 全局搜索，借助 **algolia**
+- 输出 npm,开源
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## md 文档相关
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 支持文件夹嵌套?
+- 支持代码高亮
+- md 文件夹多层
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 技术栈
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 基础框架 Nextjs
+- 换肤 next-themes
+- gray-matter：解析 md 文档
+- fast-glob
+- 渲染 md 文档
