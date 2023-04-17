@@ -1,18 +1,19 @@
 export interface Article {
-  article_id: string;
-  article_info: ArticleInfo;
-  category: Category;
+  route: string;
+  title: string;
+  brief_content: string;
+  content: string;
+  cover_image?: string;
+  featured_image?: string;
+  // 创建时间
+  date: string;
   tags: Tag[];
+  user_name?: string;
 }
 
 export interface ArticleInfo {
   // 文章id
   article_id: string;
-  // 图片
-  cover_image: string;
-  title: string;
-  brief_content: string;
-  content: string;
   ctime: string;
   mtime: string;
   rtime: string;
@@ -23,13 +24,9 @@ export interface ArticleInfo {
   mark_content: string;
 }
 
-export interface Category {
-  category_id: string;
-  category_name: string;
-}
-
 export interface Tag {
-  id: number;
-  tag_id: string;
+  // id: number;
+  // tag_id: string;
   tag_name: string;
+  tag_path: string;
 }

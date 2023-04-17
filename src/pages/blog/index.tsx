@@ -2,20 +2,23 @@ import { NextPageWithLayout } from "@/types/page";
 import { Layout } from "@/components/layout";
 import { GetStaticProps, NextPage } from "next";
 import { getAllPosts } from "../../lib/getAllPost";
-
+import ArticleList from "@/components/blogs/ArticleList";
 interface PostProps {
-  posts: any;
+  post: any;
 }
-const Page: NextPage<PostProps> = ({ posts }) => {
-  console.log(posts);
-  return <section className="flex h-auto w-full justify-center ">Blog</section>;
+const Page: NextPage<PostProps> = ({ post }) => {
+  return (
+    <section className="flex h-auto w-full justify-center ">
+      <ArticleList articles={post} />
+    </section>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllPosts({});
+  const post = await getAllPosts({});
   return {
     props: {
-      posts,
+      post,
     },
   };
 };
