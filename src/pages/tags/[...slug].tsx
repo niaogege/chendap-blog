@@ -1,7 +1,7 @@
 import { NextPageWithLayout } from "@/types/page";
 import { Layout } from "@/components/layout";
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
-import { getArticles } from "../../lib/db";
+import { getAllPosts } from "@/lib/getAllPost";
 
 const Page = ({
   data,

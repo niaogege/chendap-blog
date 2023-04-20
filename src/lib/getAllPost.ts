@@ -7,10 +7,10 @@ import fs from "fs";
 // 得到根目录下的post文件夹下的所有内容
 const getAllPosts = async ({ cfg }: any) => {
   const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || "./blog";
-  const files = glob.sync(`${srcDir}/**/*.md`, { ignore: ["node_modules"] });
+  const files = glob.sync(`${srcDir}/**/*.mdx`, { ignore: ["node_modules"] });
   const data = files
     .map((v) => {
-      let route = v.replace(".md", "");
+      let route = v.replace(".mdx", "");
       if (route.startsWith("./")) {
         route = route.replace(
           new RegExp(`^\\.\\/${path.join(srcDir, "/")}`),
@@ -42,8 +42,9 @@ const getOnePostPages = (slug: string[]) => {
   return new Promise((resolve, reject) => {
     getAllPosts({})
       .then((res) => {
-        const cur = res.find((item) =>
-          item.route.includes(`${slug.join("/")}`)
+        const cur = res.find(
+          (item) =>
+            slug && slug.length && item.route.includes(`${slug.join("/")}`)
         );
         resolve(cur);
       })

@@ -122,13 +122,13 @@ module.exports = lineClamp;
 
 这是我觉得比较方便的一点，针对不同的屏幕采用不同的断点，很方便构建各种屏幕的样式
 
-| 断点前缀 | 最小宽度 |                CSS                 |
-| :------- | -------: | :--------------------------------: |
-| sm       |    640px | @media (min-width: 640px) { ... }  |
-| md       |    768px | @media (min-width: 768px) { ... }  |
-| lg       |   1024px | @media (min-width: 1024px) { ... } |
-| xl       |   1280px | @media (min-width: 1280px) { ... } |
-| 2xl      |   1536px | @media (min-width: 1536px) { ... } |
+| 断点前缀 | 最小宽度 |              CSS               |
+| :------- | -------: | :----------------------------: |
+| sm       |    640px | @media (min-width: 640px) { }  |
+| md       |    768px | @media (min-width: 768px) { }  |
+| lg       |   1024px | @media (min-width: 1024px) { } |
+| xl       |   1280px | @media (min-width: 1280px) { } |
+| 2xl      |   1536px | @media (min-width: 1536px) { } |
 
 比如下面这种，sm 的占 1/2，中等屏幕以上的每分占 1/3
 
@@ -174,7 +174,7 @@ module.exports = {
 };
 ```
 
-现在，dark:{class} 类将不再根据 prefers-color-scheme 起作用，而是当在 HTML 树中出现 dark 类时起作用。
+现在，`dark:{class}` 类将不再根据 prefers-color-scheme 起作用，而是当在 HTML 树中出现 dark 类时起作用。
 
 ```html
 <!-- Dark mode not enabled -->

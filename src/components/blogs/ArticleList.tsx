@@ -13,7 +13,6 @@ export default function ArticleList({
   totalPages,
   currentPage,
 }: Props) {
-  console.log(articles, "article");
   return (
     <div className="max-w-5xl mx-auto">
       <ul>
