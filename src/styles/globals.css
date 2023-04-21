@@ -6,4 +6,25 @@
   .text-underline {
     @apply underline underline-offset-4 transition-all;
   }
+
+  .border-one {
+    @apply rounded border border-solid border-gray-300 text-primaryThree hover:bg-red-400 hover:text-white;
+  }
+  .border-test {
+    @apply rounded border border-solid border-gray-300;
+  }
+}
+
+.language-css {
+  overflow-wrap: break-word;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.transition-in > span {
+  opacity: 1;
 }

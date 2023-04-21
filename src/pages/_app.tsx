@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/prism.css";
 import { AppPropsWithLayout } from "@/types/page";
 import Router from "next/router";
 import ProgressBar from "@badrap/bar-of-progress";
@@ -26,7 +27,6 @@ export default function MyApp({
   pageProps,
   router,
 }: AppPropsWithLayout) {
-  // console.log(router, "router");
   const getLayout = Component.getLayout ?? ((page) => page);
   return getLayout(<Component {...pageProps} />);
 }

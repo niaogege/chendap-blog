@@ -1,3 +1,6 @@
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { Toc } from "@/types/Toc";
+
 export interface Article {
   route: string;
   title: string;
@@ -9,6 +12,11 @@ export interface Article {
   date: string;
   tags: Tag[];
   user_name?: string;
+}
+
+export interface ArticlePost extends Article {
+  source: MDXRemoteSerializeResult;
+  toc: Toc;
 }
 
 export interface ArticleInfo {

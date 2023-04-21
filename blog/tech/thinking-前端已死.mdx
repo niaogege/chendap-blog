@@ -7,6 +7,12 @@ featured_image: https://www.bythewayer.com/img/nextjs.webp
 
 前端大佬的文章[也谈“前端已死”](https://juejin.cn/post/7218109174084534330)
 
+<Callout>
+
+💡 至于前端是否会死，这个完全不要担心。 只要互联网还在，前端这个职业就不会消失，因为无论设备介质如何变化，用户的交互行为都不会消失，而前端就是一个处理人机交互的职业。
+
+</Callout>
+
 拜读大佬的文章，有几点感受感同身受。
 
 ### 1.互联网红利逐渐消退，前端岗位变少，求职人员远大于需求，越来越多的前端找不到合适的工作
@@ -45,3 +51,27 @@ featured_image: https://www.bythewayer.com/img/nextjs.webp
 引用大佬的话：每当看到这样的问题，我都会眉头紧锁，过于功利的心态，在技术这条路上注定难有大成。重要的不是学了什么，而是学得怎么样。**心无旁骛，专注自身**，无论学什么，从事哪个职业，只要自己足够有竞争力，都有前途。
 
 早一批入职的前端即将年满 35+，面临失业和环境艰苦的双重压力，更没有多余的时间和精力让自己放空
+
+```js
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
+
+import Test from "../components/test";
+
+const components = { Test };
+
+export default function TestPage({ source }) {
+  return (
+    <div className="wrapper">
+      <MDXRemote {...source} components={components} />
+    </div>
+  );
+}
+
+export async function getStaticProps() {
+  // MDX text - can be from a local file, database, anywhere
+  const source = "Some **mdx** text, with a component <Test />";
+  const mdxSource = await serialize(source);
+  return { props: { source: mdxSource } };
+}
+```

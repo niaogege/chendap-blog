@@ -20,13 +20,19 @@ export default function ArticleList({
           <li key={article.route} className="py-4">
             <article className="px-4">
               <div className=" md:flex md:flex-row">
-                <div className="md:shrink-0">
+                <Link
+                  className="md:shrink-0 overflow-hidden"
+                  href={`/blog/${article.route}`}
+                >
                   <img
-                    className="md:w-72"
-                    src={article.featured_image}
+                    className="md:w-72 md:max-h-[140px] transform  object-cover duration-200 hover:md:scale-110 rounded"
+                    src={
+                      article.featured_image ||
+                      "https://www.bythewayer.com/img/vue3.webp"
+                    }
                     alt={article.title}
                   />
-                </div>
+                </Link>
                 <div className="md:pl-8 mt-3">
                   <div>
                     <h3 className="text-2xl font-bold leading-8 tracking-tight cursor-pointer">

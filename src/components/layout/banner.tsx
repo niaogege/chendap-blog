@@ -49,7 +49,7 @@ export const Banner = () => {
     setMounted(true);
   }, []);
   return (
-    <section className="fixed z-10 flex h-18 w-full justify-center ">
+    <section className="sticky top-0 z-10 flex h-18 w-full justify-center bg-white/50 dark:bg-gray-700 backdrop-blur">
       <section className="p-4 flex flex-row w-screen max-w-screen-xl justify-between items-center ">
         <div
           onClick={goHome}
@@ -60,7 +60,7 @@ export const Banner = () => {
             src={"https://www.bythewayer.com/img/logo1.webp"}
             alt="MyBlog"
           />
-          <span>Chendap' Blog</span>
+          <span className="hidden md:inline">Chendap' Blog</span>
         </div>
         <div className="flex flex-row items-center">
           <div className="inline w-6 cursor-pointer" onClick={changeTheme}>

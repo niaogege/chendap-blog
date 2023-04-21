@@ -30,6 +30,10 @@ module.exports = {
         85: "22rem",
       },
       textColor: {
+        primaryOne: "#111111",
+        primaryThree: "#333333",
+        primarySix: "#666666",
+        primaryNine: "#999999",
         darkPrimary: "rgb(218, 218, 219)",
         grayprimary: "#999999",
         little: "#8D8D91",

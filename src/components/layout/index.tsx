@@ -9,12 +9,12 @@ type LayoutProps = {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
-      {/* <HeadSetting /> */}
-      <section className="h-18">
-        <Banner />
+      <Banner />
+      <section className="felx flex-col justify-between antialiased">
+        {/* <HeadSetting /> */}
+        <main className="mb-auto">{children}</main>
+        <Footer />
       </section>
-      <main>{children}</main>
-      <Footer />
     </ThemeProvider>
   );
 };
