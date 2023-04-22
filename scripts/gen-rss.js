@@ -11,19 +11,19 @@ async function generate() {
     cdata: false,
   });
 
-  const posts = await fs.readdir(path.join(__dirname, "..", "blog", "_posts"));
+  const posts = await fs.readdir(path.join(__dirname, "..", "post"));
   await Promise.all(
     posts.map(async (name) => {
       if (name.startsWith("index.")) return;
 
       const content = await fs.readFile(
-        path.join(__dirname, "..", "blog", "_posts", name)
+        path.join(__dirname, "..", "posts", name)
       );
       const frontmatter = matter(content);
       console.log(frontmatter.data.title, "frontmatter.data.title");
       feed.item({
         title: frontmatter.data.title,
-        url: "/blog/" + name.replace(/\.mdx?/, ""),
+        url: "/post/" + name.replace(/\.mdx?/, ""),
         date: frontmatter.data.date,
         description: frontmatter.data.description,
         categories: frontmatter.data.tags.split(", "),

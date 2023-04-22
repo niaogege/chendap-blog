@@ -5,8 +5,8 @@ import Pagination from "./Pagination";
 import { Article } from "../../types/article";
 type Props = {
   articles: Article[];
-  currentPage?: number;
-  totalPages?: number;
+  currentPage: number;
+  totalPages: number;
 };
 export default function ArticleList({
   articles,
@@ -22,10 +22,10 @@ export default function ArticleList({
               <div className=" md:flex md:flex-row">
                 <Link
                   className="md:shrink-0 overflow-hidden"
-                  href={`/blog/${article.route}`}
+                  href={`/post/${article.route}`}
                 >
                   <img
-                    className="md:w-72 md:max-h-[140px] transform  object-cover duration-200 hover:md:scale-110 rounded"
+                    className="md:w-72 md:max-h-[150px] transform object-cover duration-200 hover:md:scale-110 rounded"
                     src={
                       article.featured_image ||
                       "https://www.bythewayer.com/img/vue3.webp"
@@ -37,10 +37,10 @@ export default function ArticleList({
                   <div>
                     <h3 className="text-2xl font-bold leading-8 tracking-tight cursor-pointer">
                       <Link
-                        className="text-gray-900 dark:text-gray-100"
-                        href={`/blog/${article.route}`}
+                        className="text-gray-900 dark:text-gray-100 hover:underline hover:underline-offset-4"
+                        href={`/post/${article.route}`}
                       >
-                        <p>{article.title}</p>
+                        <p className="line-clamp-2">{article.title}</p>
                       </Link>
                     </h3>
                     <div className="mt-3 flex flex-wrap">
@@ -66,7 +66,7 @@ export default function ArticleList({
           </li>
         ))}
       </ul>
-      {/* <Pagination totalPages={totalPages} currentPage={currentPage} /> */}
+      <Pagination totalPages={totalPages} currentPage={currentPage} />
     </div>
   );
 }

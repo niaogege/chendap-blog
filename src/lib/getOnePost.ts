@@ -23,7 +23,7 @@ import { Toc } from "@/types/Toc";
 const root = process.cwd();
 
 export const getPost = async (slug: String[]) => {
-  const pathAll = `blog/${slug.join("/")}.mdx`;
+  const pathAll = `post/${slug.join("/")}.mdx`;
   const fileContents = fs.readFileSync(path.join(pathAll), "utf8");
   const { data, content } = matter(fileContents);
   const tags = data.tags.split(",").map((e) => ({

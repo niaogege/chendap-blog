@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "name": "Blog项目调试dev",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "dev"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "cwd": "${workspaceFolder}",
+      "type": "node"
+    }
+  ]
+}

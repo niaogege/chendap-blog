@@ -16,7 +16,7 @@ export const Banner = () => {
     },
     {
       name: "Posts",
-      path: "/blog",
+      path: "/post",
     },
     {
       name: "Archives",
@@ -50,13 +50,13 @@ export const Banner = () => {
   }, []);
   return (
     <section className="sticky top-0 z-10 flex h-18 w-full justify-center bg-white/50 dark:bg-gray-700 backdrop-blur">
-      <section className="p-4 flex flex-row w-screen max-w-screen-xl justify-between items-center ">
+      <section className="px-4 py-3 flex flex-row w-screen max-w-screen-xl justify-between items-center ">
         <div
           onClick={goHome}
           className="cursor-pointer p-2 flex flex-row items-center"
         >
           <img
-            className="w-8 inline mr-1"
+            className="w-8 inline mr-1 hover:transition hover:duration-1000 hover:ease-in-out hover:rotate-[360deg]"
             src={"https://www.bythewayer.com/img/logo1.webp"}
             alt="MyBlog"
           />
@@ -70,7 +70,7 @@ export const Banner = () => {
             {data.map((item) => {
               return (
                 <li
-                  className="mr-1 md:mr-2 p-1 md:p-2 cursor-pointer"
+                  className="mr-1 md:mr-2 p-1 md:p-2 cursor-pointer hover:underline hover:underline-offset-4"
                   key={item.name}
                 >
                   <Link href={item.path}>

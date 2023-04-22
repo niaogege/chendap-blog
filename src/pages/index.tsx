@@ -31,7 +31,7 @@ const Page: NextPageWithLayout = () => {
         <h1 className="mb-2">
           This is{" "}
           <Link
-            href="./blog"
+            href="/post"
             className="underline-offset-1 dark:text-darkPrimary"
           >
             Chendap' Blog

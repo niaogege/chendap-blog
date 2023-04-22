@@ -1,49 +1,51 @@
 import { NextPageWithLayout } from "@/types/page";
 import { Layout } from "@/components/layout";
-import { GetStaticProps } from "next";
+import { getAllTags } from "@/lib/getAllTags";
 import { getAllPosts } from "@/lib/getAllPost";
 import { InferGetStaticPropsType } from "next";
 import kebabCase from "@/utils/kebabCase";
+import ArticleList from "@/components/blogs/ArticleList";
+import { Article } from "@/types/article";
+import { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import { ParsedUrlQuery } from "querystring";
 const Page = ({
   post,
   tag,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div>
-      <h1>This is CPPP</h1>
-      <h1>{tag}</h1>
-      <h1>{post.length}</h1>
+    <div className="h-[calc(100vh-120px)] flex flex-col mx-auto p-4 max-w-4xl w-full">
+      <ArticleList articles={post} />
     </div>
   );
 };
 
-export const getStaticPaths = async () => {
-  const post = await getAllPosts({});
-
-  const paths = post.map((e) => {
-    console.log(e.tag, "e.tag");
+export const getStaticPaths: GetStaticPaths = async () => {
+  const tags = await getAllTags();
+  const paths = Object.keys(tags).map((e) => {
     return {
       params: {
-        slug: e.tag.map((item) => item),
+        slug: e,
       },
     };
   });
-  console.log(paths, "paths");
   return {
     paths,
     fallback: false,
   };
 };
 
-export async function getStaticProps(context: GetStaticProps) {
+export const getStaticProps: GetStaticProps<{
+  post: Article[];
+  tag: string;
+}> = async ({ params = {} }) => {
   const post = await getAllPosts({});
-  const tag = context.params.slug as string;
+  const tag = params.slug as string;
   const filteredPosts = post.filter((post) =>
-    post.tags.map((t) => kebabCase(t)).includes(tag)
+    post.tag.map((t: string) => kebabCase(t.trim())).includes(tag)
   );
   // 将数据传递到页面上
   return { props: { post: filteredPosts, tag } };
-}
+};
 
 (Page as NextPageWithLayout).getLayout = function getLayout(
   page: React.ReactElement

@@ -9,7 +9,8 @@ import { MDXRemote } from "next-mdx-remote";
 import allMDXComponents from "@/components/blogs/AllMDXComponents";
 import PostPage from "@/components/blogs/PostPage";
 import TOCInline from "@/components/blogs/TOCInline";
-import { log } from "console";
+import { useRouter } from "next/router";
+
 interface ParamsSlug {
   slug: string[];
 }
@@ -20,19 +21,24 @@ interface BlogPageProp {
 }
 
 const Page = ({ post, params }: BlogPageProp) => {
+  const router = useRouter();
+
   return (
     <section className="h-auto mx-auto p-4 max-w-4xl w-full">
-      <header className="mb-2">
+      <header className="mb-4">
         <nav>
-          <Link href="/blog" legacyBehavior>
-            <a>👈 &nbsp; Go Back</a>
-          </Link>
-          <div className="w-full mx-auto text-center">
+          <a
+            className="font-medium hover:underline cursor-pointer"
+            onClick={() => router.back()}
+          >
+            👈 &nbsp; Go Back
+          </a>
+          <div className="w-full mx-auto text-center ">
             <h1 className="text-2xl font-bold text-center mt-6 mb-6">
               {post.title}
             </h1>
             <span className="text-gray-500 italic mr-1"> {post.user_name}</span>
-            <time className="text-gray-500 italic">{post.date}</time>
+            <time className="text-gray-500 italic ">{post.date}</time>
           </div>
         </nav>
       </header>
@@ -51,7 +57,6 @@ export const getStaticPaths = async () => {
       slug: e.route.split("/"),
     },
   }));
-  console.log(paths, "paths");
   return {
     paths,
     fallback: false,
