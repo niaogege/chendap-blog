@@ -50,3 +50,29 @@ export default function remarkTocHeadings(options) {
     });
 }
 ```
+
+### docker 相关
+
+## Docker
+
+```bash
+// Dockerfile
+FROM node:16
+COPY . /nestjs
+WORKDIR /nestjs
+RUN npm install && npm run build
+CMD npm run start
+EXPOSE 3002
+```
+
+- docker image build -t next-demo . 创建镜像
+- docker container run --rm -p 8000:3002 -it next-demo 创建容器
+  // -p 参数：容器的 3000 端口映射到本机的 8000 端口。
+  // -it 参数：容器的 Shell 映射到当前的 Shell，然后你在本机窗口输入的命令，就会传入容器。
+- docker login
+<!-- 为本地的 image 标注用户名和版本。 -->
+- docker image tag next-demo:0.0.1 niaogege/next-demo:0.0.1
+- docker image push niaogege/next-demo:0.0.1
+
+// 本地拉下来之后
+docker container run --rm -p 3002:3002 -it niaogege/next-demo：0.0.1

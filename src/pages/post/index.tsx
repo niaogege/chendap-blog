@@ -21,7 +21,7 @@ const Page: NextPage<PostProps> = ({ post, totalPages, currentPage }) => {
   );
 };
 
-const PAGE = 2;
+const PAGE = 5;
 export const getStaticProps: GetStaticProps = async (context) => {
   const post = await getAllPosts({});
   const currentPage = 1;
