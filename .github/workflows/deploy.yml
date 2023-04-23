@@ -11,7 +11,7 @@ on:
 
 env:
   # 设置环境变量
-  TARGET_DIR: /www/web/blog
+  TARGET_DIR: /www/web/next
 
 jobs:
   # 打包构建

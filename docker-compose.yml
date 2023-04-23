@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Test.Dockerfile
+    ports:
+      - 3002:3002
+    container_name: cpp-wmh-container
