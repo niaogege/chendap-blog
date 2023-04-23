@@ -48,6 +48,8 @@ export const Banner = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const title = `Chendap' Blog`;
   return (
     <section className="sticky top-0 z-10 flex h-18 w-full justify-center bg-white/50 dark:bg-gray-700 backdrop-blur">
       <section className="px-4 py-3 flex flex-row w-screen max-w-screen-xl justify-between items-center ">
@@ -60,7 +62,7 @@ export const Banner = () => {
             src={"https://www.bythewayer.com/img/logo1.webp"}
             alt="MyBlog"
           />
-          <span className="hidden md:inline">Chendap' Blog</span>
+          <span className="hidden md:inline">{title}</span>
         </div>
         <div className="flex flex-row items-center">
           <div className="inline w-6 cursor-pointer" onClick={changeTheme}>

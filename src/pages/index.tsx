@@ -20,6 +20,7 @@ const Page: NextPageWithLayout = () => {
       href: "/about",
     },
   ];
+  const title = `Chendap' Blog`;
   return (
     <div className="w-full flex justify-center items-center h-[calc(100vh-120px)] min-h-min">
       <Head>
@@ -34,7 +35,7 @@ const Page: NextPageWithLayout = () => {
             href="/post"
             className="underline-offset-1 dark:text-darkPrimary"
           >
-            Chendap' Blog
+            {title}
           </Link>
         </h1>
         <section className="flex flex-row justify-center">
