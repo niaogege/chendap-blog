@@ -25,7 +25,7 @@
 - 换肤 next-themes
 - gray-matter：解析 md 文档
 - fast-glob
-- 渲染 md 文档
+- [渲染 md 文档](https://github.com/hashicorp/next-mdx-remote)
 - [mdast-util-to-string](https://www.npmjs.com/package/mdast-util-to-string) mdast utility to get the text content of a node.
 
 ## 技术细节
