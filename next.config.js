@@ -2,6 +2,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  distDir: "dist",
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
   /**设置跨域请求 */
   // 路由重写
