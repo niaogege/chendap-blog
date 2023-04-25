@@ -67,4 +67,21 @@ export default function remarkTocHeadings(options) {
 
 ### 项目部署
 
-卡在了 docker-compose 那里，部署上去之后，服务器上访问 3002 端口，没有成功啊
+卡在了 docker-compose 那里，部署上去之后，服务器上访问 3002 端口，没有成功啊,退而求其次搞个本地服务也是各种问题，最后的 nginx 配置
+
+```js
+  // nginx.conf
+    server {
+        listen       80;                   #监听的端口
+        server_name  bythewayer.com;
+        #修改反向代理地址
+        location / {
+            proxy_set_header X-Nginx-Proxy true;
+            proxy_set_header Connection "";
+            proxy_pass http://127.0.0.1:3001; #实际提供http内容服务的地址
+            proxy_redirect default;
+            # root   html;                  # 默认的根目录
+            #index  index.html index.htm;   # 默认的首页页面
+        }
+     }
+```
