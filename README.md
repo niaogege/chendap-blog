@@ -1,5 +1,12 @@
 待办计划
 
+## 主题借鉴，感谢各位大佬贡献的开源仓库
+
+- [小马部落阁](https://maqib.cn/)
+- [tailwindcss](https://github.com/tailwindlabs/tailwindcss.com)
+- [Lil’Log](https://lilianweng.github.io/)
+- [相关图标来源](https://react-icons.github.io/react-icons/icons?name=gr)
+
 ## 功能介绍
 
 - 完全自定义主题，页面静态化渲染，SSG
@@ -21,6 +28,7 @@
 
 ## 技术栈
 
+- [icon 相关](https://react-icons.github.io/react-icons/)
 - 基础框架 Nextjs
 - 换肤 next-themes
 - gray-matter：解析 md 文档

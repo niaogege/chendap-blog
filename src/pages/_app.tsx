@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import "@/styles/prism.css";
+import "@/styles/custom.css";
+import "@/styles/linehigh.css";
 import { AppPropsWithLayout } from "@/types/page";
 import Router from "next/router";
 import ProgressBar from "@badrap/bar-of-progress";
-
 const progress = new ProgressBar({
   size: 2,
   color: "#38bdf8",

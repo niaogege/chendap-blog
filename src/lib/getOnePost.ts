@@ -9,15 +9,14 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
-import rehypeCitation from "rehype-citation";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypePresetMinify from "rehype-preset-minify";
+import { rehypePluginPreWrapper } from "./rehype-pre-wrapper";
 
 // remark
 import remarkGfm from "remark-gfm";
-import remarkFootnotes from "remark-footnotes";
+// import remarkFootnotes from "remark-footnotes";
 import remarkMath from "remark-math";
-import remarkCodeTitles from "./remark-code-title";
 import remarkTocHeadings from "./remark-toc-headings";
 import { Toc } from "@/types/Toc";
 const root = process.cwd();
@@ -36,17 +35,16 @@ export const getPost = async (slug: String[]) => {
       remarkPlugins: [
         [remarkTocHeadings, { exportRef: toc }],
         remarkGfm,
-        remarkCodeTitles,
-        [remarkFootnotes, { inlineNotes: true }],
+        // [remarkFootnotes, { inlineNotes: true }],
         remarkMath,
       ],
       rehypePlugins: [
         rehypeSlug,
         rehypeAutolinkHeadings,
         rehypeKatex,
-        [rehypeCitation, { path: path.join(root, "blog") }],
         [rehypePrismPlus, { ignoreMissing: true }],
         rehypePresetMinify,
+        rehypePluginPreWrapper,
       ],
       format: "mdx",
     },

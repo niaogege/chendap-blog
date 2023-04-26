@@ -51,7 +51,7 @@ const TOCInline = ({
           className={`${heading.depth >= indentDepth && "ml-6"} my-1`}
         >
           <a
-            className="text-primary-500 text-primarySix dark:text-darkPrimary hover:underline"
+            className="text-primary-500 text-[var(--blog-c-text-6)] dark:text-darkPrimary hover:underline"
             href={heading.url}
           >
             {heading.value}
@@ -65,7 +65,7 @@ const TOCInline = ({
     <>
       {asDisclosure ? (
         <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg pr-8 py-2 mb-2">
-          <details>
+          <details className="w-full">
             <summary className="ml-3 pt-2 pb-2 text-base font-medium cursor-pointer">
               Contents
             </summary>

@@ -11,14 +11,14 @@ const nextConfig = {
   // }),
   /**设置跨域请求 */
   // 路由重写
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/post/page/:page",
-  //       destination: "/post",
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: "/love",
+        destination: "https://bythewayer.com/love",
+      },
+    ];
+  },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

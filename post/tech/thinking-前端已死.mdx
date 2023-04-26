@@ -26,7 +26,7 @@ featured_image: https://www.bythewayer.com/img/nextjs.webp
 
 1.深入 SSR/SSG/ISR，掌握其原理，在做某项目的时候运用，获得过 xx 曝光
 
-2.基于 vitepress 扩展过自己主题已开源
+2.基于 vitepress 扩展过自己主题
 
 3.在 CI/CD 方便有自己的实践
 
@@ -40,7 +40,7 @@ featured_image: https://www.bythewayer.com/img/nextjs.webp
 
 1.利用 Nextjs 开发完目前的任务,越快越好
 
-2.基于 vitepress 继续扩展自己的主题
+2.基于 vitepress 继续扩展自己的主题(限制太多，太束缚，目前已改成通过 [nextjs 开发自己的博客](https://github.com/niaogege/chendap-blog))
 
 3.学习基于 vite 搭建 no-bundle 开发服务
 
@@ -51,27 +51,3 @@ featured_image: https://www.bythewayer.com/img/nextjs.webp
 引用大佬的话：每当看到这样的问题，我都会眉头紧锁，过于功利的心态，在技术这条路上注定难有大成。重要的不是学了什么，而是学得怎么样。**心无旁骛，专注自身**，无论学什么，从事哪个职业，只要自己足够有竞争力，都有前途。
 
 早一批入职的前端即将年满 35+，面临失业和环境艰苦的双重压力，更没有多余的时间和精力让自己放空
-
-```js
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
-
-import Test from "../components/test";
-
-const components = { Test };
-
-export default function TestPage({ source }) {
-  return (
-    <div className="wrapper">
-      <MDXRemote {...source} components={components} />
-    </div>
-  );
-}
-
-export async function getStaticProps() {
-  // MDX text - can be from a local file, database, anywhere
-  const source = "Some **mdx** text, with a component <Test />";
-  const mdxSource = await serialize(source);
-  return { props: { source: mdxSource } };
-}
-```

@@ -5,7 +5,8 @@ import path from "path";
 import fs from "fs";
 import { kebabCase, getTextSummary } from "@/utils";
 
-const wordCount = 100;
+// 简介字数限制
+const wordCount = 50;
 
 // 得到根目录下的post文件夹下的所有内容
 export const getAllPosts = async ({ cfg }: any) => {
@@ -29,7 +30,7 @@ export const getAllPosts = async ({ cfg }: any) => {
         tag_path: `${kebabCase(e.trim())}`,
       }));
 
-      const brief = getTextSummary(fileContent, 50);
+      const brief = getTextSummary(fileContent, wordCount);
       return {
         ...meta,
         tags,

@@ -1,6 +1,5 @@
 import { NextPageWithLayout } from "@/types/page";
 import { Layout } from "@/components/layout";
-import Link from "next/link";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import { getAllPosts } from "@/lib/getAllPost";
 import { getPost } from "@/lib/getOnePost";
@@ -10,7 +9,9 @@ import allMDXComponents from "@/components/blogs/AllMDXComponents";
 import PostPage from "@/components/blogs/PostPage";
 import TOCInline from "@/components/blogs/TOCInline";
 import { useRouter } from "next/router";
-
+import { setupCopyCodeButton } from "@/utils/code";
+import { useEffect } from "react";
+import { BlogSEO } from "@/components/Seo";
 interface ParamsSlug {
   slug: string[];
 }
@@ -22,9 +23,12 @@ interface BlogPageProp {
 
 const Page = ({ post, params }: BlogPageProp) => {
   const router = useRouter();
-
+  useEffect(() => {
+    setupCopyCodeButton && setupCopyCodeButton();
+  }, []);
   return (
-    <section className="h-auto mx-auto p-4 max-w-4xl w-full">
+    <section className="h-auto mx-auto p-4 max-w-4xl w-full relative">
+      <BlogSEO {...post} />
       <header className="mb-4">
         <nav>
           <a

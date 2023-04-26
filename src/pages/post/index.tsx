@@ -4,6 +4,7 @@ import { GetStaticProps, NextPage } from "next";
 import { getAllPosts } from "@/lib/getAllPost";
 import ArticleList from "@/components/blogs/ArticleList";
 import { Article } from "@/types/article";
+import { PageSEO } from "@/components/Seo";
 interface PostProps {
   post: Article[];
   currentPage: number;
@@ -12,6 +13,10 @@ interface PostProps {
 const Page: NextPage<PostProps> = ({ post, totalPages, currentPage }) => {
   return (
     <section className="flex h-auto w-full justify-center">
+      <PageSEO
+        title={`chendapeng's Blog The ${currentPage} Page`}
+        description={`文章第页${currentPage}`}
+      />
       <ArticleList
         articles={post}
         totalPages={totalPages}

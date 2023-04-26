@@ -1,0 +1,42 @@
+---
+title: mdx 文档转换
+date: 2023-0425
+tags: mdx, nextjs
+featured_image: https://www.bythewayer.com/img/tailwindcss.webp
+---
+
+mdx 文档转换成 html 步骤
+
+## 写作相关
+
+- 展示 md 文档索引以及点击标题跳转到对应位置
+- 展示 md 中的 title 以及 md 文档类型
+- 阔以复制当前代码块
+- 代码行高亮
+
+## 插件相关介绍
+
+remark-gfm 让 md 支持 GitHub Flavored Markdown （自动超链接链接文字、脚注、删除线、表格、任务列表）
+
+remark-math rehype-katex 支持数学公式
+
+rehype-slug rehype-autolink-headings 自动给标题加唯一 id
+
+rehype-prism-plus 支持代码高亮
+
+```js {3-4} title="/lib/getOnePost.ts"
+// Rehype packages
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeKatex from "rehype-katex";
+import rehypeCitation from "rehype-citation";
+import rehypePrismPlus from "rehype-prism-plus";
+import rehypePresetMinify from "rehype-preset-minify";
+import { rehypePluginPreWrapper } from "./rehype-pre-wrapper";
+
+// remark
+import remarkGfm from "remark-gfm";
+import remarkFootnotes from "remark-footnotes";
+import remarkMath from "remark-math";
+import remarkTocHeadings from "./remark-toc-headings";
+```

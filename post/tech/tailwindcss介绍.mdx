@@ -27,12 +27,99 @@ npx @chendap/wmh-theme??
 所有的安装完之后需要在引入的 css 文件里添加
 
 ```css
+@tailwind base; // 重置样式表
+@tailwind components; // 组件类
+@tailwind utilities; // 工具类
+```
+
+[adding-custom-styles](https://ctailwindcss.com/docs/adding-custom-styles)
+
+- The base layer is for things like reset rules or default styles applied to plain HTML elements.
+- The components layer is for class-based styles that you want to be able to override with utilities.
+- The utilities layer is for small, single-purpose classes that should always take precedence over any other styles.
+
+tailwind base 相当于一份重置样式表，包含了 **最基础的样式** 。
+tailwind components 包含了一些组件类， 组件相当于**复合样式**，
+tailwind utilities 包含了工具类，也就是 **flex mx-auto** 这些内置样式。
+
+举例说明下 base/components/utilities 如何使用
+
+#### base
+
+If you just want to set some defaults for the page (like the text color, background color, or font family), the easiest option is just adding some classes to the html or body elements:
+
+如果您只想为该页面设置一些默认值（例如文本颜色，背景颜色或字体系列），最简单的选项就是将一些类添加到 HTML 或 body 元素中：
+
+If you want to add your own default base styles for specific HTML elements, use the @layer directive to add those styles to Tailwind’s base layer:
+
+如果要为特定的 HTML 元素添加自己的默认基本样式，请使用@Layer 指令将这些样式添加到 tailwindcss 的 base 类：
+
+```css title=style.css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  /* ... */
+}
 ```
 
-其中 tailwind base 相当于一份重置样式表，包含了最基础的样式。tailwind components 包含了一些组件类， 组件相当于复合样式，tailwind utilities 包含了工具类，也就是 flex mx-auto 这些内置样式。
+如果要引用主题中定义的任何值，则在添加自定义基础样式时使用主题函数或@Apply 指令。
+
+#### components
+
+```html
+<!-- Before extracting a custom class -->
+<button
+  class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+>
+  Save changes
+</button>
+
+<!-- After extracting a custom class -->
+<button class="btn-primary">Save changes</button>
+```
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  }
+}
+```
+
+使用 **@layer components** 的好处一个是 utility classes 类依然能覆盖 自定义的 components 类
+
+#### utilities
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+}
+```
+
+This can be useful when there’s a CSS feature you’d like to use in your project that Tailwind doesn’t include utilities for out of the box.
+当你想在项目中使用 Tailwind 不包括开箱即用的实用程序的 CSS 功能时，这可能会很有用
+
+#### 总结
+
+> 不管是`@layer`哪个类,使用 layer 的好处，1.自动支持 Tailwind 的修饰符语法，比如 hover 或者 md 等 2.添加到基础层、组件层或实用程序层的任何自定义样式只有在 HTML 中实际使用这些样式的情况下才会包含在编译的 CSS 中，就是说阔以定义但是 html 中没有使用的话，最终编译时是不会打包进去的
 
 这么划分的原因是因为 css 的优先级规则，tailwindcss 全部都是一级样式，在类名权重相等的情况，下面的样式可以覆盖上面的样式，所以工具类优先，组件类次之，基础样式兜底，生成的样式顺序尤为重要，所以 上面三句指令的顺序非必须建议不要修改。
 
@@ -42,8 +129,7 @@ npx @chendap/wmh-theme??
 
 比如项目中有一处样式是这样，需要一行文本之后使用省略号，或者三行文本需要使用省略号，这时候你该怎么办
 
-```js
-// tailwind.config.js
+```js title=tailwind.config.js
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
@@ -64,6 +150,8 @@ module.exports = {
 ```
 
 比如官方提供的[line-clamp 插件](https://github.com/tailwindlabs/tailwindcss-line-clamp)
+
+> [3.3.1 版本已经合并到主分支，意味着阔以直接在项目中使用 line-clamp-1](https://tailwindcss.com/blog/tailwindcss-v3-3#line-clamp-out-of-the-box)
 
 ```js
 const plugin = require("tailwindcss/plugin");
@@ -142,8 +230,7 @@ module.exports = lineClamp;
 
 您可以在 tailwind.config.js 文件中完全自定义您的断点：
 
-```js
-// tailwind.config.js
+```js title=tailwind.config.js
 module.exports = {
   theme: {
     screens: {
@@ -165,7 +252,6 @@ module.exports = {
 - 配置
 
 ```js
-// tailwind.config.js
 module.exports = {
   darkMode: "class",
   // ...
@@ -271,9 +357,7 @@ div {
 
 ### 重写/覆盖 Tailwind 配置[自定义配置变量](https://www.tailwindcss.cn/docs/customizing-colors)
 
-```js
-// tailwind.config.js
-
+```js title=tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   theme: {
@@ -287,7 +371,6 @@ module.exports = {
       },
     },
   },
-  // ...
 };
 ```
 
@@ -298,6 +381,78 @@ module.exports = {
 <span class="text-regular">常规色</span> /
 <span class="text-secondary">次要色</span> /
 <span class="text-disabled">禁用色</span> /
+```
+
+最佳实践应该如下
+
+```js title=tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT: "var(--modern-c-brand)",
+          light: "var(--modern-c-brand-light)",
+          dark: "var(--modern-c-brand-dark)",
+          lighter: "var(--modern-c-brand-lighter)",
+          darker: "var(--modern-c-brand-darker)",
+        },
+        text: {
+          1: "var(--modern-c-text-1)",
+          2: "var(--modern-c-text-2)",
+        },
+        divider: {
+          DEFAULT: "var(--modern-c-divider)",
+          light: "var(--modern-c-divider-light)",
+          dark: "var(--modern-c-divider-dark)",
+        },
+        gray: {
+          light: {
+            1: "var(--modern-c-gray-light-1)",
+            2: "var(--modern-c-gray-light-2)",
+          },
+        },
+      },
+    },
+  },
+};
+```
+
+### 构建自己的 plugin
+
+You can also add custom styles to your project using Tailwind’s plugin system instead of using a CSS file:
+
+```js title=tailwind.config.js
+const plugin = require("tailwindcss/plugin");
+
+module.exports = {
+  // ...
+  plugins: [
+    plugin(function ({ addBase, addComponents, addUtilities, theme }) {
+      addBase({
+        h1: {
+          fontSize: theme("fontSize.2xl"),
+        },
+        h2: {
+          fontSize: theme("fontSize.xl"),
+        },
+      });
+      addComponents({
+        ".card": {
+          backgroundColor: theme("colors.white"),
+          borderRadius: theme("borderRadius.lg"),
+          padding: theme("spacing.6"),
+          boxShadow: theme("boxShadow.xl"),
+        },
+      });
+      addUtilities({
+        ".content-auto": {
+          contentVisibility: "auto",
+        },
+      });
+    }),
+  ],
+};
 ```
 
 ### 参考

@@ -1,0 +1,89 @@
+:root {
+  --modern-code-line-highlight-color: rgba(0, 99, 199, 1);
+}
+
+.dark {
+  --modern-code-line-highlight-color: rgba(255, 255, 255, 0.9);
+}
+
+.language-css {
+  overflow-wrap: break-word;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.transition-in > span {
+  opacity: 1;
+}
+.modern-code-content {
+  position: relative;
+}
+
+.modern-code-title {
+  padding: 12px 16px;
+  font-size: 14px;
+  background-color: rgba(0, 99, 199, 0.05);
+  transition: background-color 0.5s;
+}
+
+.copy {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  cursor: pointer;
+  background-image: url("/copy.svg");
+  background-position: 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  transition: all 0.16s;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.prose [class*="language-"]:hover .modern-code-content > button.copy,
+.prose [class*="language-"] .modern-code-content > button.copy:focus {
+  opacity: 1;
+}
+
+.prose [class*="language-"] .modern-code-content > button.copy:hover {
+  transform: scale(1.15);
+}
+
+.prose [class*="language-"] .modern-code-content > button.copy.copied,
+.prose [class*="language-"] .modern-code-content > button.copy:hover.copied {
+  border-radius: 0 4px 4px 0;
+  background-image: url("/copied.svg");
+  transform: scale(1);
+  opacity: 1;
+}
+
+.prose [class*="language-"] .modern-code-content span.highlighted {
+  background-color: red;
+  position: absolute;
+  display: block;
+  left: 0;
+  right: 0;
+  padding-left: 20px;
+}
+
+.prose .lang {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--modern-code-line-highlight-color);
+  transition: color 0.4s, opacity 0.4s;
+}

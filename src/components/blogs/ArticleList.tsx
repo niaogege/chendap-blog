@@ -53,7 +53,7 @@ export default function ArticleList({
                       ))}
                     </div>
                   </div>
-                  <div className="prose text-sm max-w-none text-gray-500 dark:text-gray-400 line-clamp-2">
+                  <div className="text-sm max-w-none text-gray-500 dark:text-gray-400 line-clamp-1">
                     {article.brief_content}
                   </div>
                   <time className="text-xs text-gray-400">{article.date}</time>

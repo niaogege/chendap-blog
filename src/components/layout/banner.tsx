@@ -78,7 +78,7 @@ export const Banner = () => {
                   <Link href={item.path}>
                     <span
                       className={clsx({
-                        "text-red-500": pathname === item.path,
+                        "text-red-600": pathname === item.path,
                         "text-underline": pathname === item.path,
                       })}
                     >
