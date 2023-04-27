@@ -26,6 +26,9 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
           codeNode.properties.className = `${codeNode.properties.className} ${highlightMeta}`;
           meta = meta.replace(highlightReg, "").trim();
         }
+        if (meta && meta.includes("showLineNumbers")) {
+          meta = meta.replace("showLineNumbers", "").trim();
+        }
         const parsedMeta = qs.parse(meta);
         const rawTitle = Array.isArray(parsedMeta.title)
           ? parsedMeta.title.join("")
@@ -75,12 +78,12 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
             type: "element",
             tagName: "div",
             properties: {
-              className: title ? "modern-code-title " : "",
+              className: title ? "modern-code-title " : "no-title",
             },
             children: [
               {
                 type: "text",
-                value: title as string,
+                value: title ? `${title}` : "",
               },
             ],
           },

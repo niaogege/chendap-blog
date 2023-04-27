@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import "@/styles/prism.css";
 import "@/styles/custom.css";
 import "@/styles/linehigh.css";
+import "@/styles/header.css";
+import "gitalk/dist/gitalk.css";
 import { AppPropsWithLayout } from "@/types/page";
 import Router from "next/router";
 import ProgressBar from "@badrap/bar-of-progress";

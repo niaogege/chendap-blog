@@ -1,0 +1,57 @@
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  position: relative;
+  font-weight: 600;
+  outline: none;
+}
+
+.prose h1 {
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-size: 28px;
+}
+
+.prose h2 {
+  margin: 48px 0 16px;
+  border-top: 1px solid rgba(60, 60, 67, 0.12);
+  padding-top: 24px;
+  letter-spacing: -0.02em;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+.prose h3 {
+  margin: 32px 0 0;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  font-size: 20px;
+}
+
+.prose .header-anchor {
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-weight: 500;
+  opacity: 0;
+  color: #10b981;
+  transition: color 0.25s, opacity 0.25s;
+}
+
+.prose h1:hover .header-anchor,
+.prose h1 .header-anchor:focus,
+.prose h2:hover .header-anchor,
+.prose h2 .header-anchor:focus,
+.prose h3:hover .header-anchor,
+.prose h3 .header-anchor:focus,
+.prose h4:hover .header-anchor,
+.prose h4 .header-anchor:focus,
+.prose h5:hover .header-anchor,
+.prose h5 .header-anchor:focus,
+.prose h6:hover .header-anchor,
+.prose h6 .header-anchor:focus {
+  opacity: 1;
+}

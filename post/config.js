@@ -2,7 +2,7 @@ const siteMetadata = {
   title: "Chendap 个人博客",
   author: "Chendap",
   headerTitle: "Chendap Blog",
-  description: "分享 JavaScript 以及热门框架，记录前端工程师学习成长历程。",
+  description: "热爱要付出实践",
   language: "en-us",
   theme: "system", // system, dark or light
   siteUrl: "https://maqib.cn",

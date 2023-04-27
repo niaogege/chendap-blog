@@ -10,8 +10,11 @@ import PostPage from "@/components/blogs/PostPage";
 import TOCInline from "@/components/blogs/TOCInline";
 import { useRouter } from "next/router";
 import { setupCopyCodeButton } from "@/utils/code";
+import { bindingWindowScroll } from "@/utils/scrollHeadr";
 import { useEffect } from "react";
 import { BlogSEO } from "@/components/Seo";
+import GitalkComponent from "gitalk/dist/gitalk-component";
+import { NoSSR } from "@/components/NoSSR";
 interface ParamsSlug {
   slug: string[];
 }
@@ -25,9 +28,11 @@ const Page = ({ post, params }: BlogPageProp) => {
   const router = useRouter();
   useEffect(() => {
     setupCopyCodeButton && setupCopyCodeButton();
+    bindingWindowScroll && bindingWindowScroll();
   }, []);
+
   return (
-    <section className="h-auto mx-auto p-4 max-w-4xl w-full relative">
+    <section className="h-auto mx-auto p-4 px-6 max-w-4xl w-full relative">
       <BlogSEO {...post} />
       <header className="mb-4">
         <nav>
@@ -50,6 +55,29 @@ const Page = ({ post, params }: BlogPageProp) => {
       <PostPage>
         <MDXRemote {...post.source} components={allMDXComponents} lazy={true} />
       </PostPage>
+      <NoSSR>
+        <GitalkComponent
+          options={{
+            owner: "niaogege",
+            // clientID: 'GitHub Application Client ID',
+            // clientSecret: 'GitHub Application Client Secret',
+            // repo: 'GitHub repo',
+            // owner: 'GitHub repo owner',
+            // admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
+            // id: location.pathname,      // Ensure uniqueness and length less than 50
+            // distractionFreeMode: false  // Facebook-like distraction free mode
+            repo: "blog-comment",
+            admin: ["niaogege"],
+            ClientID: "14358f21bfa09660100b",
+            ClientSecret: "96f34217eea90602cb5b142eb89508898354754c",
+            labels: ["gitalk"],
+            perPage: 10,
+            pagerDirection: "last",
+            createIssueManually: true,
+            distractionFreeMode: false,
+          }}
+        />
+      </NoSSR>
     </section>
   );
 };

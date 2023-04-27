@@ -11,11 +11,11 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypePresetMinify from "rehype-preset-minify";
+import rehypePluginExternalLinks from "rehype-external-links";
 import { rehypePluginPreWrapper } from "./rehype-pre-wrapper";
-
 // remark
 import remarkGfm from "remark-gfm";
-// import remarkFootnotes from "remark-footnotes";
+import remarkFootnotes from "remark-footnotes";
 import remarkMath from "remark-math";
 import remarkTocHeadings from "./remark-toc-headings";
 import { Toc } from "@/types/Toc";
@@ -35,16 +35,36 @@ export const getPost = async (slug: String[]) => {
       remarkPlugins: [
         [remarkTocHeadings, { exportRef: toc }],
         remarkGfm,
-        // [remarkFootnotes, { inlineNotes: true }],
+        [remarkFootnotes, { inlineNotes: true }],
         remarkMath,
       ],
       rehypePlugins: [
         rehypeSlug,
-        rehypeAutolinkHeadings,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              class: "header-anchor",
+              ariaHidden: "true",
+              target: "_top",
+            },
+            content: {
+              type: "text",
+              value: "#",
+            },
+          },
+        ],
+        [
+          rehypePluginExternalLinks,
+          {
+            target: "_blank",
+            rel: "noopener noreferrer",
+          },
+        ],
         rehypeKatex,
         [rehypePrismPlus, { ignoreMissing: true }],
-        rehypePresetMinify,
         rehypePluginPreWrapper,
+        rehypePresetMinify,
       ],
       format: "mdx",
     },
