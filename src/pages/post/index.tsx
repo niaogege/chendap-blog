@@ -5,6 +5,7 @@ import { getAllPosts } from "@/lib/getAllPost";
 import ArticleList from "@/components/blogs/ArticleList";
 import { Article } from "@/types/article";
 import { PageSEO } from "@/components/Seo";
+
 interface PostProps {
   post: Article[];
   currentPage: number;

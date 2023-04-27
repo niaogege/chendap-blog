@@ -44,7 +44,7 @@ const TOCInline = ({
   );
 
   const tocList = (
-    <ul className="py-2 pl-2 text-sm font-medium leading-relaxed xl:border-b xl:border-gray-200  xl:dark:border-gray-700 list-disc">
+    <ul className="py-2 pl-2 text-sm font-medium leading-relaxed list-disc">
       {filteredToc.map((heading) => (
         <li
           key={heading.value}

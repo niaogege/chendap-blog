@@ -1,9 +1,9 @@
 import matter from "gray-matter";
-import glob from "fast-glob";
 import dayjs from "dayjs";
 import path from "path";
 import fs from "fs";
 import { serialize } from "next-mdx-remote/serialize";
+import { Toc } from "@/types/Toc";
 
 // Rehype packages
 import rehypeSlug from "rehype-slug";
@@ -18,8 +18,6 @@ import remarkGfm from "remark-gfm";
 import remarkFootnotes from "remark-footnotes";
 import remarkMath from "remark-math";
 import remarkTocHeadings from "./remark-toc-headings";
-import { Toc } from "@/types/Toc";
-const root = process.cwd();
 
 export const getPost = async (slug: String[]) => {
   const pathAll = `post/${slug.join("/")}.mdx`;

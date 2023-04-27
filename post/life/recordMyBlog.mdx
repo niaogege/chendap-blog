@@ -7,26 +7,24 @@ featured_image: https://www.bythewayer.com/img/prismjs.webp
 
 ## 初衷
 
-很早就想搞一个自己的博客，从头到尾，现在距离 dream 更进一步了！
+很早就想搞一个自己的博客，从头到尾，是时候展示复制粘贴的能力了！
 
 ## 功能介绍
 
 - [x] 完全自定义主题，页面静态化渲染，SSG
-- [x] 标签页和归档页以及任何想定制的页面都行，当然还是得需要自定义开发
+- [x] 标签页和归档页以及任何想定制的页面(当然需要用户自定义开发)
 - [x] 根据文档自动生成网站 tag
 - [x] 黑白主题切换 (借助 next-theme)
 - [x] md 文档中代码高亮,借助 prismjs
 - [x] md 文档中插入自定义组件
-- [ ] 自动生成**rss.xml**,seo 相关
-- [ ] 国际化(中英文)
-- [ ] 评论功能，现在还不知道对接哪一个评论系统
-- [ ] 全局搜索，借助 **algolia**
+- [x] 自动生成**rss.xml**,seo 相关
+- [x] 评论功能 [gittalk](https://github.com/gitalk/gitalk)
+- [x] 全局搜索，借助 [**docsearch**](https://github.com/algolia/docsearch)
+- [ ] 国际化(中英文,暂时放弃)
 
 ## 写作 md 文档相关
 
-- [md 文档样式采用 tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)
-- [支持代码高亮,代码高亮还是好丑](https://prismjs.com/index.html)，学学人家如何做到很美观的
-- [md 文档支持 通过索引建立目录,toC 这个 remark 真复杂？](https://github.com/remarkjs/remark)
+[异步 md 文档](../tech/markdownChangeToHtml.mdx)
 
 ## 技术栈相关
 
@@ -38,177 +36,15 @@ featured_image: https://www.bythewayer.com/img/prismjs.webp
 
 > 当时纠结了好久，用哪个 mdx 渲染器
 
-- 文档格式相关相关
-
-```js {3-4} title="/lib/getOnePost.ts"
-// Rehype packages
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeKatex from "rehype-katex";
-import rehypeCitation from "rehype-citation";
-import rehypePrismPlus from "rehype-prism-plus";
-import rehypePresetMinify from "rehype-preset-minify";
-import { rehypePluginPreWrapper } from "./rehype-pre-wrapper";
-
-// remark
-import remarkGfm from "remark-gfm";
-import remarkFootnotes from "remark-footnotes";
-import remarkMath from "remark-math";
-import remarkTocHeadings from "./remark-toc-headings";
-```
-
 ## 后续努力方向
 
+- 每篇文章打包完之后体积超过 128kb,也不知道哪一步导致这么大？
 - 全网字体需要更换下，如何更换？
 - 图片尺寸不一，需要统一裁剪
 - 自动生成 rss 文件 **"build": "node ./scripts/gen-rss && next build"**
 - 当前宽度小于 400px 顶部导航部分样式调整
-- [x] js 代码 进行复制按钮操作
 
 ## 技术细节
-
-### 文章索引
-
-```js title="remarkTocHeadings.js"
-import { visit } from "unist-util-visit";
-import { slug } from "github-slugger";
-import { toString } from "mdast-util-to-string";
-
-export default function remarkTocHeadings(options) {
-  return (tree) =>
-    visit(tree, "heading", (node) => {
-      const textContent = toString(node);
-      options.exportRef.push({
-        value: textContent,
-        url: "#" + slug(textContent),
-        depth: node.depth,
-      });
-    });
-}
-```
-
-### mdx 文档渲染
-
-```js title="post.js"
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
-
-import Test from "../components/test";
-
-const components = { Test };
-
-export default function TestPage({ source }) {
-  return (
-    <div className="wrapper">
-      <MDXRemote {...source} components={components} />
-    </div>
-  );
-}
-
-export async function getStaticProps() {
-  // MDX text - can be from a local file, database, anywhere
-  const source = "Some **mdx** text, with a component <Test />";
-  const mdxSource = await serialize(source);
-  return { props: { source: mdxSource } };
-}
-```
-
-### md 格式中的代码复制功能
-
-```js {1-4} title="rehypePluginPreWrapper.js"
-import qs from "querystring";
-import type { Plugin } from "unified";
-import { visit } from "unist-util-visit";
-import type { Element, Root } from "hast";
-
-export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
-  return (tree: any) => {
-    visit(tree, "element", (node) => {
-      // <pre><code>...</code></pre>
-      // 1. 找到 pre 元素
-      if (
-        node.tagName === "pre" &&
-        node.children[0]?.type === "element" &&
-        node.children[0].tagName === "code" &&
-        !node.data?.isVisited
-      ) {
-        const codeNode = node.children[0];
-        const codeClassName =
-          codeNode.properties?.className?.toString() || "language-text";
-        // language-xxx
-        let meta = (codeNode.data?.meta as string) || "";
-        const highlightReg = /{[\d,-]*}/i;
-        const highlightMeta = highlightReg.exec(meta)?.[0];
-        if (highlightMeta && codeNode.properties) {
-          codeNode.properties.className = `${codeNode.properties.className} ${highlightMeta}`;
-          meta = meta.replace(highlightReg, "").trim();
-        }
-        const parsedMeta = qs.parse(meta);
-        const rawTitle = Array.isArray(parsedMeta.title)
-          ? parsedMeta.title.join("")
-          : parsedMeta.title;
-        const title = rawTitle?.replace(/["'`]/g, "");
-
-        const clonedNode: Element = {
-          type: "element",
-          tagName: "pre",
-          children: node.children,
-          data: {
-            isVisited: true,
-          },
-          properties: {
-            style: "margin-top: 0",
-          },
-        };
-
-        // 修改原来的 pre 标签 -> div 标签
-        node.tagName = "div";
-        node.properties = node.properties || {};
-        node.properties.className = codeClassName;
-
-        node.children = [
-          {
-            type: "element",
-            tagName: "div",
-            properties: {
-              className: title ? "modern-code-title " : "",
-            },
-            children: [
-              {
-                type: "text",
-                value: title as string,
-              },
-            ],
-          },
-          {
-            type: "element",
-            tagName: "div",
-            properties: {
-              className: "modern-code-content",
-            },
-            children: [
-              {
-                type: "element",
-                tagName: "button",
-                properties: {
-                  className: "copy",
-                },
-                children: [
-                  {
-                    type: "text",
-                    value: "",
-                  },
-                ],
-              },
-              clonedNode,
-            ],
-          },
-        ];
-      }
-    });
-  };
-};
-```
 
 ### 项目部署
 
@@ -233,6 +69,8 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
 ## 主题借鉴，感谢各位大佬贡献的开源仓库
 
 - [小马部落阁](https://maqib.cn/)
+- [modern.js 中的 doc](https://github.com/web-infra-dev/modern.js)
+- [VitePress](https://vitepress.dev/)
 - [tailwindcss](https://github.com/tailwindlabs/tailwindcss.com)
 - [Lil’Log](https://lilianweng.github.io/)
 - [相关图标来源](https://react-icons.github.io/react-icons/icons?name=gr)

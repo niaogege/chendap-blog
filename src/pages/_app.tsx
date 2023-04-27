@@ -3,10 +3,13 @@ import "@/styles/prism.css";
 import "@/styles/custom.css";
 import "@/styles/linehigh.css";
 import "@/styles/header.css";
+import "@/styles/docsearch.css";
 import "gitalk/dist/gitalk.css";
+import "@docsearch/css";
 import { AppPropsWithLayout } from "@/types/page";
 import Router from "next/router";
 import ProgressBar from "@badrap/bar-of-progress";
+
 const progress = new ProgressBar({
   size: 2,
   color: "#38bdf8",
