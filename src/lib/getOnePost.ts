@@ -72,7 +72,9 @@ export const getPost = async (slug: String[]) => {
     ...data,
     content,
     tags,
-    date: `${dayjs(data.date).format("YYYY MMM DD")}`,
+    date: dayjs(data.date).isValid()
+      ? dayjs(data.date).format("MMM DD, YYYY")
+      : dayjs().format("MMM DD, YYYY"),
     source: mdxSource,
     toc,
     user_name: data.user ?? "chendap",

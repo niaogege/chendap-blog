@@ -35,7 +35,9 @@ export const getAllPosts = async ({ cfg }: any) => {
         ...meta,
         tags,
         tag: meta.tags.split(",") || [],
-        date: dayjs(meta.date).format("MMM DD, YYYY"),
+        date: dayjs(meta.date).isValid()
+          ? dayjs(meta.date).format("MMM DD, YYYY")
+          : dayjs().format("MMM DD, YYYY"),
         content,
         route,
         user_name: meta.user ?? "chendap",
