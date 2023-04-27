@@ -68,13 +68,13 @@ const Page = ({ post, params }: BlogPageProp) => {
             // distractionFreeMode: false  // Facebook-like distraction free mode
             repo: "blog-comment",
             admin: ["niaogege"],
-            ClientID: "14358f21bfa09660100b",
-            ClientSecret: "96f34217eea90602cb5b142eb89508898354754c",
+            clientID: "14358f21bfa09660100b",
+            clientSecret: "96f34217eea90602cb5b142eb89508898354754c",
             labels: ["gitalk"],
-            perPage: 10,
             pagerDirection: "last",
             createIssueManually: true,
             distractionFreeMode: false,
+            id: `${post.route}`,
           }}
         />
       </NoSSR>

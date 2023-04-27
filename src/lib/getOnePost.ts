@@ -78,5 +78,6 @@ export const getPost = async (slug: String[]) => {
     source: mdxSource,
     toc,
     user_name: data.user ?? "chendap",
+    route: "/post/" + slug.join("/"),
   };
 };
