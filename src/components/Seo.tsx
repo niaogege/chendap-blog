@@ -102,8 +102,8 @@ export const BlogSEO = ({
   date,
   featured_image,
 }: ArticlePost) => {
-  const publishedAt = new Date(date).toISOString();
-  const modifiedAt = new Date(date || date).toISOString();
+  const publishedAt = date;
+  const modifiedAt = date;
   const imagesArr = [featured_image];
 
   const featuredImages = imagesArr.map((img) => {
