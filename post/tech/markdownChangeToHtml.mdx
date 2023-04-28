@@ -9,13 +9,11 @@ mdx 文档转换成 html 步骤
 
 ## 写作相关
 
-- 展示 md 文档索引以及点击标题跳转到对应位置
-- 展示 md 中的 title 以及 md 文档类型
-- 阔以复制当前代码块
-- 代码行高亮
+- 展示 md 中的 title 以及 md 文档类型以及代码块复制功能，自定义 rehype-pre-wrapper，借鉴[modern.js](https://github.com/web-infra-dev/modern.js/blob/main/packages/cli/doc-core/src/node/mdx/rehypePlugins/preWrapper.ts)
+- [代码行高亮 rehype-prism-plus](https://www.npmjs.com/package/rehype-prism-plus)
 - [md 文档样式采用 tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)
-- [支持代码高亮,代码高亮还是好丑](https://prismjs.com/index.html)，学学人家如何做到很美观的
-- [md 文档支持 通过索引建立目录,toC 这个 remark 真复杂？](https://github.com/remarkjs/remark)
+- [支持代码高亮,代码高亮还是好丑,但能修改其中的样式](https://prismjs.com/index.html)
+- [md 文档支持 通过索引建立目录以及点击标题跳转到对应位置](https://github.com/remarkjs/remark)
 
 ## 插件相关介绍
 
@@ -23,9 +21,9 @@ mdx 文档转换成 html 步骤
 
 - remark-math rehype-katex 支持数学公式
 
-- rehype-slug rehype-autolink-headings 自动给标题加唯一 id
+- rehype-slug rehype-autolink-headings 自动给标题加唯一 id 以及点击跳转到对应的标题去
 
-- rehype-prism-plus 支持代码高亮语法以及特点行数语法高亮
+- rehype-prism-plus 支持代码高亮语法以及特定行数语法高亮
 
 ## 文档技术细节
 
@@ -103,6 +101,8 @@ export default function remarkTocHeadings(options) {
 ```
 
 ### md 格式中的代码复制功能
+
+> 借鉴[modern.js](https://github.com/web-infra-dev/modern.js/blob/main/packages/cli/doc-core/src/node/mdx/rehypePlugins/preWrapper.ts)
 
 ```js {1-4} title="rehypePluginPreWrapper.js"
 import qs from "querystring";

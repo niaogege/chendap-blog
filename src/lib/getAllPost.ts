@@ -7,10 +7,12 @@ import { kebabCase, getTextSummary } from "@/utils";
 
 // 简介字数限制
 const wordCount = 50;
+const root = process.cwd();
 
+export const postsPath = path.join(root, "post");
 // 得到根目录下的post文件夹下的所有内容
 export const getAllPosts = async ({ cfg }: any) => {
-  const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || "./post";
+  const srcDir = cfg?.srcDir || process.argv.slice(2)?.[1] || postsPath;
   const files = glob.sync(`${srcDir}/**/*.mdx`, { ignore: ["node_modules"] });
   const data = files
     .map((v) => {

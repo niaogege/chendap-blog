@@ -2,6 +2,23 @@
 
 很早就想搞一个自己的博客，从头到尾，是时候展示复制粘贴的能力了！
 
+# nextjs-mdx-blog-theme
+
+- **View**: [demo site](https://bythewayer.com/)
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Deployment**: 自己的服务器
+- **Content**: [MDX](https://github.com/mdx-js/mdx)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+
+## Running Locally
+
+```bash
+$ git clone https://github.com/alexcarpenter/nextjs-mdx-blog-theme
+$ cd nextjs-mdx-blog-theme
+$ npm install
+$ npm run dev:watch
+```
+
 ## 功能介绍
 
 - [x] 完全自定义主题，页面静态化渲染，SSG
