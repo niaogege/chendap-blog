@@ -4,10 +4,10 @@ name: DeployServer
 on:
   push:
     branches:
-      - main
+      - docker-deploy
   pull_request:
     branches:
-      - main
+      - docker-deploy
 
 env:
   # 设置环境变量
@@ -38,5 +38,5 @@ jobs:
             './*' => $TARGET_DIR/
           last_ssh: |- # --build 每一次都需要重新打镜像
             cd $TARGET_DIR
-            node server.js
+            docker-compose up -d --build 
             echo $LASTSSH

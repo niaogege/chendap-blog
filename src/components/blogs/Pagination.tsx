@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { GrPrevious, GrNext } from "react-icons/gr";
 interface Props {
   totalPages: number;
   currentPage: number;
@@ -17,7 +18,7 @@ export default function Pagination({ totalPages, currentPage }: Props) {
             className="cursor-auto disabled:opacity-50"
             disabled={!prevPage}
           >
-            上一页
+            <GrPrevious />
           </button>
         )}
         {prevPage && (
@@ -26,7 +27,9 @@ export default function Pagination({ totalPages, currentPage }: Props) {
               currentPage - 1 === 1 ? `/post/` : `/post/page/${currentPage - 1}`
             }
           >
-            <button>上一页</button>
+            <button>
+              <GrPrevious />
+            </button>
           </Link>
         )}
         <span>
@@ -37,12 +40,14 @@ export default function Pagination({ totalPages, currentPage }: Props) {
             className="cursor-auto disabled:opacity-50"
             disabled={!nextPage}
           >
-            下一页
+            <GrNext />
           </button>
         )}
         {nextPage && (
           <Link href={`/post/page/${currentPage + 1}`}>
-            <button>下一页</button>
+            <button>
+              <GrNext />
+            </button>
           </Link>
         )}
       </nav>
