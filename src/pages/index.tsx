@@ -1,42 +1,47 @@
 import Head from "next/head";
-import Link from "next/link";
 import type { NextPageWithLayout } from "@/types/page";
-import { FaGithub } from "react-icons/fa";
-import { SiAboutdotme } from "react-icons/si";
-import { TbBrandJuejin } from "react-icons/tb";
 import { Layout } from "@/components/layout";
 import { MyLinks } from "@/components/layout/myLinks";
 const Page: NextPageWithLayout = () => {
-  const title = `Chendap Blog`;
+  const title = `Chendap' Blog`;
   return (
     <div className="w-full flex justify-center items-center h-[calc(100vh-120px)] min-h-min">
       <Head>
-        <title>chendap Blog 踏踏实实</title>
+        <title>{title}</title>
       </Head>
       <main className="w-screen h-screen flex justify-center items-center flex-col">
-        <h1 className="mb-2 w-[200px] flex justify-center">
-          <Link
+        <h1 className="mb-2 w-[300px] flex justify-center">
+          <a
             href="/post"
-            className="underline-offset-1 dark:text-darkPrimary relative font-bold px-2 w-full h-10 inline-block text-center mx-0 group 
-            transition ease-in overflow-hidden text-orange-500 duration-1000"
+            className="dark:text-darkPrimary 
+            relative font-bold text-3xl w-full h-10 inline-block text-center mx-0 
+            group 
+            underline
+            overflow-hidden text-orange-300
+            "
           >
             <span
-              className="font-bold px-2 absolute left-0 top-0 inline-block w-full h-10 overflow-hidden 
+              className="font-bold absolute left-0 top-0 inline-block w-full h-10 text-3xl
+              overflow-hidden
               translate-x-[-100%]
-              transition
-              duration-1000
-              ease-in
-              before:inline-block 
-              before:content-[attr(data-content)] 
-              before:translate-x-[-100%] 
-              before:transition
-              before:text-blue-600 
-              group-hover:translate-x-0 
-              group-hover:before:translate-x-0"
-              data-content={`This is ${title}`}
+              transition-transform
+              duration-700
+              before:inline-block
+              before:content-[attr(data-content)]
+              before:w-full
+              before:text-blue-700
+              dark:before:text-red-700
+              before:underline
+              before:translate-x-[100%]
+              before:transition-transform
+              before:duration-700
+              group-hover:translate-x-0
+              group-hover:before:translate-x-0
+              "
+              data-content={`${title}`}
             ></span>
-            This is {title}
-          </Link>
+            {title}
+          </a>
         </h1>
         <MyLinks />
       </main>
