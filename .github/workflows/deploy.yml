@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout # 步骤1
         uses: actions/checkout@v1 # 使用的动作。格式：userName/repoName。作用：检出仓库，获取源码。 官方actions库：https://github.com/actions
+      - run: npm install
+      - name: Build
+        run: npm run build
       - name: Deploy Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         env:
@@ -35,8 +38,7 @@ jobs:
             echo $WELCOME   
             mkdir -p $TARGET_DIR
           scp: |-
-            './*' => $TARGET_DIR/
+            './out/*' => $TARGET_DIR/
           last_ssh: |- # --build 每一次都需要重新打镜像
             cd $TARGET_DIR
-            docker-compose up -d --build 
             echo $LASTSSH

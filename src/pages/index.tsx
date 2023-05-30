@@ -2,6 +2,7 @@ import Head from "next/head";
 import type { NextPageWithLayout } from "@/types/page";
 import { Layout } from "@/components/layout";
 import { MyLinks } from "@/components/layout/myLinks";
+import Link from "next/link";
 const Page: NextPageWithLayout = () => {
   const title = `Chendap' Blog`;
   return (
@@ -11,7 +12,7 @@ const Page: NextPageWithLayout = () => {
       </Head>
       <main className="w-screen h-screen flex justify-center items-center flex-col">
         <h1 className="mb-2 w-[300px] flex justify-center">
-          <a
+          <Link
             href="/post"
             className="dark:text-darkPrimary 
             relative font-bold text-3xl w-full h-10 inline-block text-center mx-0 
@@ -41,7 +42,7 @@ const Page: NextPageWithLayout = () => {
               data-content={`${title}`}
             ></span>
             {title}
-          </a>
+          </Link>
         </h1>
         <MyLinks />
       </main>

@@ -34,7 +34,7 @@ $ npm run dev:watch
 
 ## 写作 md 文档相关
 
-[异步 md 文档](../tech/markdownChangeToHtml.mdx)
+[移步 md 文档](../tech/markdownChangeToHtml.mdx)
 
 ## 技术栈相关
 
@@ -58,7 +58,7 @@ $ npm run dev:watch
 
 ### 项目部署
 
-卡在了 docker-compose 那里，部署上去之后，服务器上访问 3002 端口，没有成功啊,退而求其次搞个本地服务也是各种问题，最后的 nginx 配置
+1.卡在了 docker-compose 那里，部署上去之后，服务器上访问 3002 端口，没有成功啊,退而求其次搞个本地服务也是各种问题，最后的 nginx 配置
 
 ```shell title="nginx.conf"
     server {
@@ -75,6 +75,14 @@ $ npm run dev:watch
         }
      }
 ```
+
+现在还有一个部署问题，每次提交都会打包新的镜像，希望打包的时候
+
+1.删除老的，不然镜像累计的越来越多，内存空间不足
+
+2.docker-compose 希望跑新的镜像，而不是沿用老的
+
+3.子项目不能访问了，比如子路由是https://bythewayer.com/learn 这种就不能正常访问了
 
 ## 借鉴，感谢各位大佬贡献的开源仓库
 
