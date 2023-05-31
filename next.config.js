@@ -10,6 +10,7 @@ const nextConfig = {
   swcMinify: true,
   assetPrefix: ".",
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
+  basePath: "/next",
   // ...(process.env.NODE_ENV === "production" && {
   //   basePath: "/next",
   //   assetPrefix: "/next",
