@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-const BLOG_URL = "https://bythewayer.com";
-
-//  ssr 配置 https://zhuanlan.zhihu.com/p/597748856
 const nextConfig = {
   reactStrictMode: true,
   // output: "standalone",
@@ -10,7 +7,6 @@ const nextConfig = {
   swcMinify: true,
   assetPrefix: ".",
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
-  basePath: "/next",
   // ...(process.env.NODE_ENV === "production" && {
   //   basePath: "/next",
   //   assetPrefix: "/next",
