@@ -107,8 +107,8 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
                   },
                 ],
               },
-              formatLang,
               clonedNode,
+              formatLang,
             ],
           },
         ];

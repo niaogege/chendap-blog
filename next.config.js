@@ -2,15 +2,12 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  // output: "standalone",
-  output: "export",
   swcMinify: true,
-  assetPrefix: ".",
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
-  // ...(process.env.NODE_ENV === "production" && {
-  //   basePath: "/next",
-  //   assetPrefix: "/next",
-  // }),
+  ...(process.env.NODE_ENV === "production" && {
+    output: "export",
+    assetPrefix: ".",
+  }),
   /**设置跨域请求 */
   // 路由重写
   // async rewrites() {

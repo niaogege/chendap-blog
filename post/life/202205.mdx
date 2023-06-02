@@ -5,6 +5,30 @@ tags: record, 2023
 featured_image: https://www.bythewayer.com/img/aima.webp
 ---
 
+## 彷徨
+
 从 2021 年 6 月到现在，整整 2 年时间都在不学无术，有点悲情，也有点无助。如何度过这段艰难岁月？
 
 自从五一回来之后，每天要买很困，要么就是吃喝玩乐，很少有学习的冲动
+
+感觉有点颓废，有点不喜欢上班了
+
+```js
+function compose(middlewares) {
+  return (ctx, next) => {
+    return dispatch(0);
+    function dispatch(i) {
+      var fn = middlewares[i];
+      if (!fn) return Promise.resolve();
+      if (i === middlewares.length) fn = next;
+      try {
+        return Promise.resolve(fn(ctx, dispatch.bind(null, i + 1)));
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+  };
+}
+```
+
+> 不出一周 肯定会遗忘
