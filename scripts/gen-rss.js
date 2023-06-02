@@ -16,8 +16,8 @@ export default function buildRss() {
   const blogUrl = `${baseUrl}/blog`;
 
   const feed = new Feed({
-    title: "Tailwind CSS Blog",
-    description: "All the latest Tailwind CSS news, straight from the team.",
+    title: "Chendap Blog",
+    description: "Chendap Blog record life and code",
     id: blogUrl,
     link: blogUrl,
     language: "en",

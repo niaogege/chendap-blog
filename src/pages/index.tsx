@@ -5,6 +5,16 @@ import { MyLinks } from "@/components/layout/myLinks";
 import Link from "next/link";
 const Page: NextPageWithLayout = () => {
   const title = `Chendap' Blog`;
+  const links = [
+    { text: "个人博客", link: "https://bythewayer.com" },
+    { text: "个人学习", link: "http://learn.bythewayer.com/" },
+    { text: "个人所爱", link: "http://love.bythewayer.com/" },
+    { text: "VitePress", link: "https://vitepress.vuejs.org/" },
+    {
+      text: "tailwindcss",
+      link: "https://www.tailwindcss.cn/docs/guides/vue-3-vite",
+    },
+  ];
   return (
     <div className="w-full flex justify-center items-center h-[calc(100vh-120px)] min-h-min">
       <Head>
@@ -44,7 +54,20 @@ const Page: NextPageWithLayout = () => {
             {title}
           </Link>
         </h1>
-        <MyLinks />
+        <div className="flex flex-row flex-wrap">
+          {links &&
+            links.map((link) => {
+              return (
+                <Link
+                  href={link.link}
+                  key={link.link}
+                  className="m-2 p-2 border-one whitespace-break-spaces"
+                >
+                  {link.text}
+                </Link>
+              );
+            })}
+        </div>
       </main>
     </div>
   );
