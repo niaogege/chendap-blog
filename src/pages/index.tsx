@@ -12,7 +12,7 @@ const Page: NextPageWithLayout = () => {
     { text: "VitePress", link: "https://vitepress.vuejs.org/" },
     {
       text: "tailwindcss",
-      link: "https://www.tailwindcss.cn/docs/guides/vue-3-vite",
+      link: "https://tailwindcss.com/docs/installation",
     },
   ];
   return (
@@ -61,7 +61,7 @@ const Page: NextPageWithLayout = () => {
                 <Link
                   href={link.link}
                   key={link.link}
-                  className="m-2 p-2 border-one whitespace-break-spaces"
+                  className="m-2 p-2 border-one whitespace-break-spaces dark:text-white"
                 >
                   {link.text}
                 </Link>
