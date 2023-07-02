@@ -1,13 +1,15 @@
 import { Footer } from "./footer";
 import { Banner } from "./banner";
 import { ThemeProvider, useTheme } from "next-themes";
-import { BackTop } from "@/components/layout/BackTop";
+import dynamic from "next/dynamic";
 
 import Head from "next/head";
 type LayoutProps = {
   children: React.ReactNode;
 };
-
+const DynamicHeader = dynamic(() => import("@/components/layout/BackTop"), {
+  loading: () => <p>Loading...</p>,
+});
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
@@ -23,7 +25,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <section className="felx flex-col justify-between antialiased relative">
         <main className="mb-auto">{children}</main>
         <Footer />
-        <BackTop />
+        <DynamicHeader />
       </section>
     </ThemeProvider>
   );

@@ -1,0 +1,124 @@
+---
+title: 基于nextjs开发的pc网站
+date: 2023-07-01 22:24:54
+tags: nextjs, seo
+featured_image: https://www.bythewayer.com/img/seo.webp
+---
+
+项目基于 nextjs+tailwindcss 做的 SSR 项目，主要目的是 SEO,利于搜索引擎抓取
+
+## seo
+
+1. 重要内容直出，不紧要的内容异步加载
+
+2. 跳转相关的用 a 标签承载，不要用 js push 的方式跳转
+
+```js
+// bad
+import { useRouter } from "next/router";
+const router = useRouter();
+const { pathname, asPath, query } = router;
+// change just the locale and maintain all other route information including href's query
+router.push({ pathname, query }, asPath, { locale: nextLocale });
+
+// 推荐就是直接a标签 good
+<details open>
+  <summary>
+    <b>Examples</b>
+  </summary>
+  <ul>
+    <li>
+      <a href="https://github.com/vercel/next.js/tree/canary/examples/with-iron-session">
+        with-iron-session
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/nextauthjs/next-auth-example">
+        next-auth-example
+      </a>
+    </li>
+  </ul>
+</details>;
+```
+
+3. 做好内容相关的 tdk
+
+```js
+<Head>
+  <title>{title}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta httpEquiv="x-dns-prefetch-control" content="on" />
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+</Head>
+```
+
+4. 对于不想被搜索引擎收录的页面，在 a 标签这里添加 ref='nofollow'属性
+
+```js
+<a
+  href="https://bythewayer.com"
+  target="_blank"
+  rel="nofollow"
+  className=" hover:text-red-500"
+>
+  cpp
+</a>
+```
+
+5. 项目根目录添加 robots.txt
+
+```md
+robots.txt
+
+# 换成自己的 sitemap
+
+{/_ Sitemap: https://precedent.dev/sitemap.xml _/}
+
+User-agent: \*
+Disallow: /api
+
+# Allow robots to be able to crawl the OG Image API route
+
+Allow: /src/pages
+```
+
+## 前端性能相关
+
+1.直出的内容太多，减少直出的数据和标签数量
+
+2.异步加载的内容采用动态加载的方式
+
+```js
+import dynamic from "next/dynamic";
+
+const DynamicHeader = dynamic(() => import("../components/header"), {
+  loading: () => <p>Loading...</p>,
+});
+
+export default function Home() {
+  return <DynamicHeader />;
+}
+```
+
+3.静态文件上传至 CDN 服务,一般公司都会提供 cdn 服务，只需要打包好配置好即可
+
+```js
+const isProd = process.env.NODE_ENV === "production";
+
+module.exports = {
+  // Use the CDN in production and localhost for development.
+  assetPrefix: isProd ? "https://cdn.mydomain.com" : undefined,
+};
+
+// 效果就是
+// before
+/_next/static/chunks/4b9b41aaa062cbbfeff4add70f256968c51ece5d.4d708494b3aed70c04f0.js
+
+
+// after
+https://cdn.mydomain.com/_next/static/chunks/4b9b41aaa062cbbfeff4add70f256968c51ece5d.4d708494b3aed70c04f0.js
+
+```
+
+4.SSR 项目由于 Node 自身性能瓶颈，所以尽量减少除页面直出的其他服务项目，比如图片服务等
