@@ -58,13 +58,14 @@ const Page: NextPageWithLayout = () => {
           {links &&
             links.map((link) => {
               return (
-                <Link
+                <a
                   href={link.link}
                   key={link.link}
                   className="m-2 p-2 border-one whitespace-break-spaces dark:text-white"
+                  rel="nolollow"
                 >
                   {link.text}
-                </Link>
+                </a>
               );
             })}
         </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Pagination from "./Pagination";
 import { Article } from "../../types/article";
 type Props = {

@@ -47,7 +47,7 @@ const Page = () => {
               <Link
                 href={link.link}
                 key={link.link}
-                className="m-2 p-2 border-one whitespace-break-spaces"
+                className="m-2 p-2 border-one whitespace-break-spaces dark:text-white"
               >
                 {link.text}
               </Link>
