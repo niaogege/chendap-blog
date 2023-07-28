@@ -11,7 +11,17 @@ export const Footer = () => {
         >
           {" "}
           Chendap Theme
-        </a>
+        </a>{" "}
+        <br />
+        <p className="mt-2">
+          Open-source MIT Licensed &nbsp;
+          <a
+            href="https://beian.miit.gov.cn/"
+            className="underline underline-offset-4"
+          >
+            苏ICP备2021048304号-1
+          </a>
+        </p>
       </p>
     </footer>
   );
