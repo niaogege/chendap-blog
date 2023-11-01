@@ -61,7 +61,7 @@ export const Banner = () => {
         >
           <img
             className="w-8 sm:block hidden mr-1 hover:transition hover:duration-1000 hover:ease-in-out hover:rotate-[360deg]"
-            src={"https://www.bythewayer.com/img/logo1.webp"}
+            src={"/logo.png"}
             alt="MyBlog"
           />
           <span className="hidden md:inline">{title}</span>

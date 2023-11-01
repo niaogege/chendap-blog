@@ -6,7 +6,7 @@ import Link from "next/link";
 const Page: NextPageWithLayout = () => {
   const title = `Chendap' Blog`;
   const links = [
-    { text: "个人博客", link: "https://bythewayer.com" },
+    { text: "个人博客", link: "https://bythewayer.com/post" },
     { text: "个人学习", link: "http://learn.bythewayer.com/" },
     { text: "个人所爱", link: "http://love.bythewayer.com/" },
     { text: "VitePress", link: "https://vitepress.vuejs.org/" },

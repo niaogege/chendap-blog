@@ -11,9 +11,9 @@ const allMDXComponents = require("../src/components/blogs/AllMDXComponents");
 const { promises: fs } = require("fs");
 const { Feed } = require("feed");
 
-export default function buildRss() {
+function buildRss() {
   const baseUrl = "https://bythewayer.com";
-  const blogUrl = `${baseUrl}/blog`;
+  const blogUrl = `${baseUrl}/post`;
 
   const feed = new Feed({
     title: "Chendap Blog",
@@ -78,3 +78,5 @@ export default function buildRss() {
   fs.writeFileSync("./public/feeds/atom.xml", feed.atom1());
   fs.writeFileSync("./public/feeds/feed.json", feed.json1());
 }
+buildRss();
+module.exports = {};
