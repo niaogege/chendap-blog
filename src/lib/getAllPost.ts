@@ -16,6 +16,7 @@ export const getAllPosts = async ({ cfg }: any) => {
   const files = glob.sync(`${srcDir}/**/*.mdx`, { ignore: ["node_modules"] });
   const data = files
     .map((v) => {
+      if (!v) return null;
       let route = v.replace(".mdx", "");
       if (route.startsWith("./")) {
         route = route.replace(
@@ -27,16 +28,19 @@ export const getAllPosts = async ({ cfg }: any) => {
       }
       const fileContent = fs.readFileSync(v, "utf-8");
       const { data: meta, content } = matter(fileContent);
-      const tags = meta.tags.split(",").map((e) => ({
-        tag_name: e.trim(),
-        tag_path: `${kebabCase(e.trim())}`,
-      }));
+      const tags =
+        (meta.tags &&
+          meta.tags.split(",").map((e) => ({
+            tag_name: e.trim(),
+            tag_path: `${kebabCase(e.trim())}`,
+          }))) ||
+        [];
 
       const brief = getTextSummary(fileContent, wordCount);
       return {
         ...meta,
         tags,
-        tag: meta.tags.split(",") || [],
+        tag: (meta.tags && meta.tags.split(",")) || [],
         date: dayjs(meta.date).isValid()
           ? dayjs(meta.date).format("MMM DD, YYYY")
           : dayjs().format("MMM DD, YYYY"),

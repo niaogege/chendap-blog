@@ -2,7 +2,6 @@ import qs from "querystring";
 import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import type { Element, Root } from "hast";
-import { log } from "console";
 
 export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
   return (tree: any) => {
@@ -37,7 +36,7 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         let formatLangType = "js";
         if (codeClassName.includes(",")) {
           const types = codeClassName
-            .split(",")
+            ?.split(",")
             .find((e: string) => e.includes("language-"));
           formatLangType = types.trim().replace(/language-/, "");
         }
@@ -72,7 +71,6 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         node.tagName = "div";
         node.properties = node.properties || {};
         node.properties.className = codeClassName;
-
         node.children = [
           {
             type: "element",

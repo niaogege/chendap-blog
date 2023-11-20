@@ -2,7 +2,7 @@
  * @Author: Chendapeng
  * @Date: 2023-02-25 18:46:33
  * @LastEditors: Chendapeng
- * @LastEditTime: 2023-04-22 23:55:18
+ * @LastEditTime: 2023-11-20 23:52:10
  * @Description:
  */
 import { execSync, spawn } from "child_process";
@@ -10,7 +10,7 @@ import { formatDate } from "./time";
 export function getDefaultTitle(content: string) {
   const title =
     clearMatterContent(content)
-      .split("\n")
+      ?.split("\n")
       ?.find((str) => {
         return str.startsWith("# ");
       })

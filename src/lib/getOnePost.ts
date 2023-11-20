@@ -23,10 +23,13 @@ export const getPost = async (slug: String[]) => {
   const pathAll = `post/${slug.join("/")}.mdx`;
   const fileContents = fs.readFileSync(path.join(pathAll), "utf8");
   const { data, content } = matter(fileContents);
-  const tags = data.tags.split(",").map((e) => ({
-    tag_name: e.trim(),
-    tag_path: `${e.trim()}`,
-  }));
+  const tags =
+    (data.tags &&
+      data.tags.split(",").map((e) => ({
+        tag_name: e.trim(),
+        tag_path: `${e.trim()}`,
+      }))) ||
+    [];
   const toc: Toc = [];
   const mdxSource = await serialize(content, {
     mdxOptions: {

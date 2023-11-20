@@ -79,7 +79,7 @@ export const getStaticPaths = async () => {
   const post = await getAllPosts({});
   const paths = post.map((e) => ({
     params: {
-      slug: e.route.split("/"),
+      slug: (e.route && e.route.split("/")) || [],
     },
   }));
   return {

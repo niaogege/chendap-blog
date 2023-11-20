@@ -2,7 +2,7 @@ const siteMetadata = {
   title: "Chendap 个人博客",
   author: "Chendap",
   headerTitle: "Chendap Blog",
-  description: "热爱要付出实践",
+  description: "记录生活，记录coding",
   language: "en-us",
   theme: "system", // system, dark or light
   siteUrl: "https://bythewayer.com/",

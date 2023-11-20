@@ -1,12 +1,11 @@
 import Head from "next/head";
 import type { NextPageWithLayout } from "@/types/page";
 import { Layout } from "@/components/layout";
-import { MyLinks } from "@/components/layout/myLinks";
 import Link from "next/link";
 const Page: NextPageWithLayout = () => {
   const title = `Chendap' Blog`;
   const links = [
-    { text: "个人博客", link: "https://bythewayer.com/post" },
+    { text: "个人博客", link: "./post" },
     { text: "个人学习", link: "http://learn.bythewayer.com/" },
     { text: "个人所爱", link: "http://love.bythewayer.com/" },
     { text: "VitePress", link: "https://vitepress.vuejs.org/" },

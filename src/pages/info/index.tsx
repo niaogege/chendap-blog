@@ -8,9 +8,9 @@ import ArticleList from "@/components/blogs/ArticleList";
 import { Article } from "@/types/article";
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { OnePage } from "./one";
-import { SecondPage } from "./second";
-import { ThirdPage } from "./third";
+import { OnePage } from "../../components/test/one";
+import { SecondPage } from "../../components/test/second";
+import { ThirdPage } from "../../components/test/third";
 const Page = ({
   post,
   tag,
