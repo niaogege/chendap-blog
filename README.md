@@ -80,9 +80,9 @@ $ npm run dev:watch
 
 1.删除老的，不然镜像累计的越来越多，内存空间不足
 
-2.docker-compose 希望跑新的镜像，而不是沿用老的
+2.**docker-compose** 希望跑新的镜像，而不是沿用老的
 
-3.子项目不能访问了，比如子路由是https://bythewayer.com/learn 这种就不能正常访问了
+3.子路由不能访问了，比如子路由是https://bythewayer.com/learn 这种就不能正常访问了，目前改成纯静态博客，直接上传打包后的静态资源
 
 ## 借鉴，感谢各位大佬贡献的开源仓库
 
