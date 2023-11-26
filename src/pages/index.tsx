@@ -5,14 +5,10 @@ import Link from "next/link";
 const Page: NextPageWithLayout = () => {
   const title = `Chendap' Blog`;
   const links = [
-    { text: "个人博客", link: "./post" },
+    { text: "个人博客", link: "https://bythewayer.com/post" },
     { text: "个人学习", link: "http://learn.bythewayer.com/" },
     { text: "个人所爱", link: "http://love.bythewayer.com/" },
-    { text: "VitePress", link: "https://vitepress.vuejs.org/" },
-    {
-      text: "tailwindcss",
-      link: "https://tailwindcss.com/docs/installation",
-    },
+    { text: "老的博客", link: "http://niaogege.cn" },
   ];
   return (
     <div className="w-full flex justify-center items-center h-[calc(100vh-120px)] min-h-min">

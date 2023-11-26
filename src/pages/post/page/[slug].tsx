@@ -10,6 +10,7 @@ import { getAllPosts } from "@/lib/getAllPost";
 import ArticleList from "@/components/blogs/ArticleList";
 import { Article } from "@/types/article";
 import { PageSEO } from "@/components/Seo";
+import { PAGE } from "@/utils/const";
 interface PostProps {
   post: Article[];
   currentPage: number;
@@ -30,8 +31,6 @@ const Page: NextPage<PostProps> = ({ post, totalPages, currentPage }) => {
     </section>
   );
 };
-
-const PAGE = 5;
 
 export const getStaticPaths: GetStaticPaths<{
   slug: string;

@@ -2,12 +2,14 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    largePageDataBytes: 350 * 100000,
+  },
   swcMinify: true,
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
-  ...(process.env.NODE_ENV === "production" && {
-    output: "export",
-    assetPrefix: ".",
-  }),
+  output: "export",
+  assetPrefix: ".",
+  trailingSlash: true,
   /**设置跨域请求 */
   // 路由重写
   // async rewrites() {

@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/getAllPost";
 import ArticleList from "@/components/blogs/ArticleList";
 import { Article } from "@/types/article";
 import { PageSEO } from "@/components/Seo";
-
+import { PAGE } from "@/utils/const";
 interface PostProps {
   post: Article[];
   currentPage: number;
@@ -27,7 +27,6 @@ const Page: NextPage<PostProps> = ({ post, totalPages, currentPage }) => {
   );
 };
 
-const PAGE = 10;
 export const getStaticProps: GetStaticProps = async (context) => {
   const post = await getAllPosts({});
   const currentPage = 1;

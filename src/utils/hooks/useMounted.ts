@@ -5,7 +5,6 @@ export default function useMountedState(): boolean {
 
   useEffect(() => {
     mountedRef.current = true;
-
     return () => {
       mountedRef.current = false;
     };
