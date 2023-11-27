@@ -2,7 +2,200 @@
 title: 前端埋点的几种方式
 date: 2023-07-01 22:24:54
 tags: ajax, 埋点
-featured_image: https://s2.loli.net/2023/11/20/uQcwYir3ZX96OMI.png
+featured_image: http://eb118-file.cdn.bcebos.com/upload/51cfd6a04f43438f9f187b278243f1c8_1018104972?x-bce-process=style/wm_ai
 ---
 
 基本上是这三种方式
+
+### 第一种方式 ajax
+
+```js
+function ajaxBuryingPoint({ url }) {
+  return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.DONE && xhr.readyState) {
+        resolve(xhr.responseText);
+      } else {
+        reject("error");
+      }
+    };
+    xhr.send();
+  });
+}
+let info = { url: "" };
+ajaxBuryingPoint(info); // 这样就成功上报了info的对象
+```
+
+缺点一般而言，埋点域名并不是当前域名，因此请求会存在跨域风险，且如果 ajax 配置不正确可能会浏览器拦截。因此使用 ajax 这类请求并不是万全之策。
+
+### 基于 img 的埋点上报
+
+可以通过一些支持跨域的标签去实现数据上报功能。script，link，img 就是我们上报的数据的最好对象
+
+script 及 link 的缺陷因为埋点涉及到请求，因此我们需要保证 script 和 link 标签的 src 可以正常请求。如果需要请求 script 和 link，我们需要将标签挂载到页面上。
+
+结论当我们使用 script 和 link 进行埋点上报时，需要挂载到页面上，而反复操作 dom 会造成页面性能受影响，而且载入 js/css 资源还会阻塞页面渲染，影响用户体验，因此对于需要频繁上报的埋点而言，script 和 link 并不合适。
+
+**基于 img 做埋点上报** 通常使用 img 标签去做埋点上报，img 标签加载**并不需要挂载到页面上**，基于 js 去 new image()，设置其 src 之后就可以直接请求图片。
+
+```js
+var img = new Image();
+img.src = "http://cdx.png";
+```
+
+可以看到即便未被挂载到页面上依旧发起了请求。
+
+### [第三种 基于**navigator.sendBeacon**的埋点上报](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/sendBeacon#%E6%8F%8F%E8%BF%B0)
+
+navigator.sendBeacon 是目前通用的埋点上报方案，Navigator.sendBeacon 方法接受两个参数，第一个参数是目标服务器的 URL，第二个参数是所要发送的数据（可选），可以是任意类型（字符串、表单对象、二进制对象等等）.当用户代理成功把数据加入传输队列时，sendBeacon() 方法将会返回 true，否则返回 false。
+
+过去，为了解决这个问题，统计和诊断代码通常要在
+
+发起一个同步 XMLHttpRequest 来发送数据。创建一个 **img** 元素并设置 src，大部分用户代理会延迟卸载（unload）文档以加载图像。创建一个几秒的 no-op 循环。上述的所有方法都会迫使用户代理延迟卸载文档，并使得下一个导航出现的更晚。下一个页面对于这种较差的载入表现无能为力。
+
+传统上，对于开发者来说保证在**文档卸载期间**发送数据一直是一个困难。因为用户代理通常会忽略在 unload 事件处理器中产生的异步 XMLHttpRequest。这就是 sendBeacon() 方法存在的意义。
+
+#### navigator.sendBeacon 优势
+
+使用 sendBeacon() 方法会使用户代理在有机会时异步地向服务器发送数据，同时**不会延迟页面的卸载或影响下一导航的载入性能**，这意味着：
+
+- 相较于 img 标签，使用 navigator.sendBeacon 会更规范，数据传输上可传输资源类型会更多。
+- 性能上的优势：1.数据发送是可靠的。 2.数据异步传输。 3.不影响下一导航的载入。
+
+示例：网站通常希望在用户完成页面浏览后向服务器发送分析或诊断数据，最可靠的方法是在 visibilitychange 事件发生时发送数据：
+
+```js
+document.addEventListener("visibilitychange", function logData() {
+  if (document.visibilityState === "hidden") {
+    navigator.sendBeacon("/log", analyticsData);
+  }
+});
+```
+
+### 总结
+
+前端埋点上报常使用 ajax，img，navigator.sendBeacon。 1.不推荐使用 ajax。 2.如果考虑兼容性的话，img 是不二之选。 3.目前最合适的方案是 navigator.sendBeacon，不仅是异步的，不受同域限制，而且作为浏览器的任务，最最重要的保证会把数据发出去，**不会延迟页面的卸载或影响下一导航的载入性能**
+
+> 数据异步发送 数据可靠，不影响页面卸载
+
+### 常见埋点行为
+
+主要有点击埋点/曝光埋点/页面停留时间上报埋点/JS 异常与静态资源加载异常
+
+#### 曝光埋点
+
+利用交叉观察器去监听当前元素是否出现在视图上
+
+```js
+var Observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    const { target, intersectionRatio } = entry;
+    if (intersectionRatio > 0) {
+      // 触发埋点
+      navigator.sendBeacon();
+    }
+  });
+});
+// 获取目标节点
+let target = document.getElementById("target");
+// 监听目标元素
+Observer.observe(target);
+```
+
+#### 页面停留时间上报埋点(vue)
+
+路由文件中，初始化一个 startTime，当页面离开时通过路由守卫计算停留时间
+
+```js
+let url = ""; // 上报地址
+let startTime = Date.now();
+let currentTime = "";
+router.beforeEach((to, from, next) => {
+  if (to) {
+    currentTime = Date.now();
+    stayTime = parseInt(currentTime - startTime);
+    navigator.sendBeacon(url, { time: stayTime });
+    startTime = Date.now();
+  }
+});
+```
+
+#### JS 异常与静态资源加载异常
+
+```js
+window.addEventListener(
+  "error",
+  (error) => {
+    if (error.message) {
+      navigator.sendBeacon(url, { error: error.message, text: "js执行异常" });
+    } else {
+      navigator.sendBeacon(url, {
+        error: error.filename,
+        text: "资源加载异常",
+      });
+    }
+  },
+  true
+);
+```
+
+#### 封装
+
+```js
+// sendBeacon 上报
+export async function sendBeacon({ url = "", params }) {
+  if (navigator?.sendBeacon && url) {
+    const isSuccess = await navigator?.sendBeacon(url, JSON.stringify(params));
+    if (isSuccess) return true;
+  }
+  return false;
+}
+
+// img 上报
+export function sendImg({ img = "", params }) {
+  return (
+    new Promise() <
+    boolean >
+    ((resolve, reject) => {
+      const imageData = objectToQueryString(params);
+      const img_o = new Image();
+      img_o.onload = () => resolve(true);
+      img_o.onerror = () => reject(false);
+      img_o.src = `${img}?${imageData}`;
+    })
+  );
+}
+function objectToQueryString(obj) {
+  var params = new URLSearchParams();
+  for (let key in obj) {
+    if (obj.hasOwnproperty(key)) {
+      params.append(key, obj[key]);
+    }
+  }
+  return params.toString();
+}
+
+// ajax 上报
+export function sendAjax({ req = "", params }) {
+  return (
+    new Promise() <
+    boolean >
+    ((resolve, reject) => {
+      if (req) {
+        postAction(req, params)
+          .then(() => resolve(true))
+          .catch(() => reject(false));
+      } else {
+        reject(false);
+      }
+    })
+  );
+}
+```
+
+### 参考
+
+- [三分钟，教你 3 种前端埋点方式！](https://mp.weixin.qq.com/s/ff5HxRcnADy34p_zArzq8A)
+- [mdn navigator.sendBeacon](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/sendBeacon#%E6%8F%8F%E8%BF%B0)

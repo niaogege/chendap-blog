@@ -9,7 +9,7 @@ const nextConfig = {
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
   output: "export",
   assetPrefix: ".",
-  trailingSlash: true,
+  trailingSlash: false,
   /**设置跨域请求 */
   // 路由重写
   // async rewrites() {
