@@ -8,7 +8,7 @@ const nextConfig = {
   swcMinify: true,
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
   output: "export",
-  assetPrefix: ".",
+  // assetPrefix: ".",
   /**设置跨域请求 */
   // 路由重写
   // async rewrites() {
