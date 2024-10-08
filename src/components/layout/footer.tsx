@@ -1,10 +1,10 @@
-import { MyLinks } from "./myLinks";
+import { MyLinks } from "./myLinks"
 export const Footer = () => {
   return (
     <footer className="text-center py-4">
       <MyLinks />
       <div className="text-xs text-gray-600 dark:text-darkPrimary">
-        @2023 Chendap Blog Powered by
+        @2022-{new Date().getFullYear()} Chendap Blog Powered by
         <a
           href="https://github.com/niaogege/chendap-blog"
           className="underline underline-offset-4"
@@ -24,5 +24,5 @@ export const Footer = () => {
         </p>
       </div>
     </footer>
-  );
-};
+  )
+}

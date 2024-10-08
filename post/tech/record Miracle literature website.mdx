@@ -22,14 +22,14 @@ featured_image: https://s2.loli.net/2023/11/20/VaLc9Iykw1sj7tR.png
 
 ```js
 // bad
-import { useRouter } from "next/router";
-const router = useRouter();
-const { pathname, asPath, query } = router;
+import { useRouter } from "next/router"
+const router = useRouter()
+const { pathname, asPath, query } = router
 // change just the locale and maintain all other route information including href's query
-router.push({ pathname, query }, asPath, { locale: nextLocale });
+router.push({ pathname, query }, asPath, { locale: nextLocale })
 
 // 推荐就是直接a标签 good
-<details open>
+;<details open>
   <summary>
     <b>Examples</b>
   </summary>
@@ -45,7 +45,7 @@ router.push({ pathname, query }, asPath, { locale: nextLocale });
       </a>
     </li>
   </ul>
-</details>;
+</details>
 ```
 
 3. 做好内容相关的 tdk
@@ -90,6 +90,12 @@ Disallow: /api
 Allow: /src/pages
 ```
 
+6.利用 time 标签标记时间相关
+
+```md
+<time>2017</time>
+```
+
 ## 前端性能相关
 
 1.直出的内容太多，减少直出的数据和标签数量
@@ -97,14 +103,14 @@ Allow: /src/pages
 2.异步加载的内容采用动态加载的方式
 
 ```js
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic"
 
 const DynamicHeader = dynamic(() => import("../components/header"), {
   loading: () => <p>Loading...</p>,
-});
+})
 
 export default function Home() {
-  return <DynamicHeader />;
+  return <DynamicHeader />
 }
 ```
 
@@ -128,4 +134,4 @@ https://cdn.mydomain.com/_next/static/chunks/4b9b41aaa062cbbfeff4add70f256968c51
 
 ```
 
-4.SSR 项目由于 Node 自身性能瓶颈，所以尽量减少除页面直出的其他服务项目，比如图片服务等
+4.SSR 项目由于 Node 自身性能瓶颈，所以尽量减少除页面直出的其他服务项目，比如图片服务等,SSR 更适合 I/O 密集型任务，[ssr 性能](https://mp.weixin.qq.com/s/9WRXESqwl24rKrfvfNnzuA)

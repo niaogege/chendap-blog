@@ -1,6 +1,6 @@
-import { NextPageWithLayout } from "@/types/page";
-import { Layout } from "@/components/layout";
-import Link from "next/link";
+import { NextPageWithLayout } from "@/types/page"
+import { Layout } from "@/components/layout"
+import Link from "next/link"
 const Page = () => {
   const links = [
     { text: "个人博客", link: "https://bythewayer.com" },
@@ -11,7 +11,7 @@ const Page = () => {
       text: "tailwindcss",
       link: "https://www.tailwindcss.cn/docs/guides/vue-3-vite",
     },
-  ];
+  ]
   return (
     <section className="flex flex-col items-start justify-start max-w-5xl mx-auto h-[calc(100vh-120px)] min-h-min p-4">
       <h1 className="text-2xl font-bold my-2">About Me</h1>
@@ -21,11 +21,11 @@ const Page = () => {
       <div>hobby: calligraphy coding</div>
       <h1 className="text-2xl font-bold my-3">Time Line</h1>
       <div className="my-2">
-        <h1>2021.6-至今</h1>
+        <time>2021.6-至今</time>
         <div>喜马拉雅 Web front-end developer</div>
       </div>
       <div className="my-2">
-        <h1>2017.11-2021.5</h1>
+        <time>2017.11-2021.5</time>
         <div>苏宁大数据中心 Web front-end developer</div>
       </div>
       <details className="w-full">
@@ -34,7 +34,7 @@ const Page = () => {
         </summary>
         <div className="ml-1">
           <div>
-            <h1>2017.2-2017.11</h1>
+            <time>2017.2-2017.11</time>
             <div>南京厚建 Web front-end developer</div>
           </div>
         </div>
@@ -51,16 +51,16 @@ const Page = () => {
               >
                 {link.text}
               </Link>
-            );
+            )
           })}
       </div>
     </section>
-  );
-};
+  )
+}
 
-(Page as NextPageWithLayout).getLayout = function getLayout(
+;(Page as NextPageWithLayout).getLayout = function getLayout(
   page: React.ReactElement
 ) {
-  return <Layout>{page}</Layout>;
-};
-export default Page;
+  return <Layout>{page}</Layout>
+}
+export default Page
