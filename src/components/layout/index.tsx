@@ -1,16 +1,30 @@
-import { Footer } from "./footer";
-import { Banner } from "./banner";
-import { ThemeProvider, useTheme } from "next-themes";
-import dynamic from "next/dynamic";
+import { Footer } from "./footer"
+import { Banner } from "./banner"
+import { ThemeProvider, useTheme } from "next-themes"
+import dynamic from "next/dynamic"
+import React, { useEffect } from "react"
 
-import Head from "next/head";
+import Head from "next/head"
 type LayoutProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 const DynamicHeader = dynamic(() => import("@/components/layout/BackTop"), {
   loading: () => <p>Loading...</p>,
-});
+})
 export const Layout = ({ children }: LayoutProps) => {
+  useEffect(() => {
+    if ("serviceWorker" in window.navigator) {
+      navigator.serviceWorker
+        .register("./sw.js", { scope: "./" })
+        .then(function (reg) {
+          console.log("sw success", reg)
+        })
+        .catch(function (err) {
+          console.log("sw fail", err)
+        })
+    }
+  }, [])
+
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
       <Head>
@@ -28,5 +42,5 @@ export const Layout = ({ children }: LayoutProps) => {
         <DynamicHeader />
       </section>
     </ThemeProvider>
-  );
-};
+  )
+}

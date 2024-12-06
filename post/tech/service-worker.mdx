@@ -1,0 +1,18 @@
+---
+title: service-worker
+date: 2024-12-06 10:58:00
+tags: pwa, sw,service-worker
+featured_image: https://imagev2.xmcdn.com/storages/5c87-audiofreehighqps/ED/0D/GKwRIUELKGg8AADJhAM71oa5.png
+---
+
+![service-worker流程](https://imagev2.xmcdn.com/storages/5c87-audiofreehighqps/ED/0D/GKwRIUELKGg8AADJhAM71oa5.png)
+
+## 应用场景
+
+基于 service worker 可以实现拦截和处理网络请求、消息推送、静默更新、事件同步等服务。
+
+- 离线缓存：配合 CacheStorage 可以将应用中不变化的资源或者很少变化的资源长久的存储在用户端，提升加载速度、降低流量消耗、降低服务器压力，提高请求速度，让用户体验更加丝滑
+- 消息推送：激活沉睡的用户，推送即时消息、公告通知，激发更新等。如 web 资讯客户端、web 即时通讯工具、h5 游戏等运营产品。
+- 事件同步：确保 web 端产生的任务即使在用户关闭了 web 页面也可以顺利完成。如 web 邮件客户端、web 即时通讯工具等。
+- 定时同步：周期性的触发 Service Worker 脚本中的定时同步事件，可借助它提前刷新缓存内容
+- 结合 CacheStorage、 Push API 和 Notification API
